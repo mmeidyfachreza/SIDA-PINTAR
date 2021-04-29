@@ -154,13 +154,8 @@
                                           </tr>
                                           <tr>
                                             <td>Ijazah</td>
-                                            <td><a href="{{route('admin.download',['type'=>"certificates",'name'=>$student->certificate ?? 'default'])}}">Download File </a>(saat ini tidak bisa karena server gratis)</td>
+                                            <td><a href="{{route('admin.download',['type'=>"certificates",'name'=>$student->certificate ?? 'default'])}}">Download</a></td>
                                           </tr>
-                                          <tr>
-                                            <td>Surat Pernyataan</td>
-                                            <td><a href="{{route('admin.download',['type'=>"certificates",'name'=>$student->certificate ?? 'default'])}}">Download File </a>(saat ini tidak bisa karena server gratis)</td>
-                                          </tr>
-
                                         </tbody>
                                       </table>
                                 </div>

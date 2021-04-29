@@ -21,6 +21,10 @@ Route::get('/', function () {
     return redirect()->route('admin.login');
 });
 
+Route::get('surat-keterangan', function () {
+    return view('letter.statement_letter');
+});
+
 Auth::routes();
 
 Route::get('/admin/login', [AdminLoginController::class,'showLoginForm'])->name('admin.login');

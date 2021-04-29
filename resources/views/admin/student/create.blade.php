@@ -146,17 +146,6 @@
                                 </div>
                                 <br>
                             </div>
-                            <div class="form-group">
-                                <label for="statement_letter">Surat Pernyataan</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="statement_letter" name="statement_letter">
-                                        <label class="custom-file-label" for="statement_letter">Pilih file</label>
-                                    </div>
-                                </div>
-                                <br>
-                            </div>
-
                         </div>
                         <!-- /.card-body -->
 

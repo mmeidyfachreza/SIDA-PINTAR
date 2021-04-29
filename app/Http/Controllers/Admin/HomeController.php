@@ -34,6 +34,6 @@ class HomeController extends Controller
 
     public function downloadFile($type,$name)
     {
-        return Storage::download($type.'/'.$name);
+        return response()->download(public_path()."/storage/".$type."/".$name);
     }
 }

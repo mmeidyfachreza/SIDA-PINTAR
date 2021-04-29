@@ -52,13 +52,6 @@ class StudentController extends Controller
                 $certificate = $request->certificate->storeAs('public/certificates',$name);
                 $student->save();
             }
-
-            if ($statements_letter = $request->file('statements_letter')) {
-                $name = time().'.'.$statements_letter->getClientOriginalExtension();
-                $student->statements_letter = $name;
-                $statements_letter = $request->statements_letter->storeAs('public/statements_letters',$name);
-                $student->save();
-            }
             DB::commit();
             // all good
         } catch (\Exception $e) {
@@ -116,12 +109,6 @@ class StudentController extends Controller
                 $name = time().'.'.$certificates->getClientOriginalExtension();
                 $student->certificate = $name;
                 $certificate = $request->certificate->storeAs('public/certificates',$name);
-            }
-            if ($statement_letters = $request->file('statement_letter')) {
-                Storage::delete('statement_letters/'.$student->statement_letter);
-                $name = time().'.'.$statement_letters->getClientOriginalExtension();
-                $student->statement_letter = $name;
-                $statement_letter = $request->statement_letter->storeAs('public/statement_letters',$name);
             }
             $student->nis = $request->nis;
             $student->name = $request->name;
