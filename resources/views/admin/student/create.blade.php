@@ -3,6 +3,8 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+    <!-- bs-custom-file-input -->
+    <script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 @endsection
 @section('content')
 <!-- Main content -->
@@ -49,7 +51,7 @@
                             <div class="form-group">
                                 <label>Tanggal Lahir</label>
                                   <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="birth_date" required/>
+                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="birth_date" placeholder="dd/mm/yyyy" required/>
                                       <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                       </div>
@@ -63,14 +65,6 @@
                                     @endforeach
                                 </select>
                               </div>
-                            <div class="form-group">
-                                <label>Tingkat</label>
-                                <select class="form-control select2" style="width: 100%;" name="levels">
-                                    @foreach ($levels as $data)
-                                    <option value="{{$data}}">{{$data}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="form-group">
                                 <label for="address">Alamat</label>
                                 <textarea class="form-control" id="address" name="address" id="address" cols="30" rows="2" required></textarea>
@@ -113,11 +107,23 @@
                                 <input type="text" class="form-control" id="guardian_phone" name="guardian_phone"
                                     placeholder="Masukan Nomor HP (tidak wajib)">
                             </div>
+                            @if (auth()->guard("web")->check())
                             <div class="form-group">
-                                <label for="school">Nama Sekolah</label>
-                                <input type="text" class="form-control" id="school" name="school"
-                                    placeholder="Masukan Nama" required>
+                                <label>Nama Sekolah</label>
+                                <select class="form-control select2" style="width: 100%;" name="school_id">
+                                    @foreach ($schools as $data)
+                                        <option value="{{$data->id}}">{{$data->name}}</option>
+                                        @endforeach
+                                </select>
                             </div>
+                            @else
+                            <div class="form-group">
+                                <label>Nama Sekolah</label>
+                                <input type="text" value="{{$schools->name}}" class="form-control" disabled>
+                                <input type="hidden" name="school_id" value="{{$schools->id}}">
+                            </div>
+                            @endif
+
                             <div class="form-group">
                                 <label>Tahun Angkatan</label>
                                   <div class="input-group date" id="reservationdate2" data-target-input="nearest">
@@ -167,9 +173,12 @@
 @section('javascript')
 <!-- Select2 -->
 <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
+<!-- bs-custom-file-input -->
+<script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <script>
     $(function () {
         //Initialize Select2 Elements
+        bsCustomFileInput.init();
         $('.select2').select2()
         //Date picker
         $('#reservationdate').datetimepicker({
@@ -183,6 +192,6 @@
             format: 'YYYY'
         });
 
-    })
+    });
   </script>
 @endsection

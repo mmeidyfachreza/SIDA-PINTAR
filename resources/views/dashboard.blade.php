@@ -18,25 +18,25 @@
                   <form action="{{route('search.student')}}" method="POST">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group">
-                            <label>Nama Sekolah</label>
-                            <select class="form-control select2" style="width: 100%;" name="school">
-                                @foreach ($schools as $data)
-                                    <option value="{{$data}}">{{$data}}</option>
-                                    @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Tingkat</label>
-                            <select class="form-control select2" style="width: 100%;" name="level">
-                                @foreach ($levels as $data)
-                                    <option value="{{$data}}">{{$data}}</option>
-                                    @endforeach
-                            </select>
-                        </div>
+                        @if (auth()->guard("web")->check())
+                            <div class="form-group">
+                                <label>Nama Sekolah</label>
+                                <select class="form-control select2" style="width: 100%;" name="school_id">
+                                    @foreach ($schools as $data)
+                                        <option value="{{$data->id}}">{{$data->name}}</option>
+                                        @endforeach
+                                </select>
+                            </div>
+                            @else
+                            <div class="form-group">
+                                <label>Nama Sekolah</label>
+                                <input type="text" value="{{$schools->name}}" class="form-control" disabled>
+                                <input type="hidden" name="school_id" value="{{$schools->id}}">
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label for="nis">NIS</label>
-                            <input type="text" class="form-control" id="nis" name="nis" placeholder="masukan NIS" value="{{old('nis')}}" required>
+                            <input type="text" class="form-control" id="nis" name="nis" placeholder="masukan NIS" value="{{old('nis',$request->nis ?? "")}}" required>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -130,19 +130,15 @@
                                           </tr>
                                           <tr>
                                             <td>Nama Wali</td>
-                                            <td>{{$student->guardian_name}}</td>
+                                            <td>{{$student->guardian_name ?? "-"}}</td>
                                           </tr>
                                           <tr>
                                             <td>Nomor HP Wali</td>
-                                            <td>{{$student->guardian_phone}}</td>
+                                            <td>{{$student->guardian_phone ?? "-"}}</td>
                                           </tr>
                                           <tr>
                                             <td>Asal Sekolah</td>
-                                            <td>{{$student->school}}</td>
-                                          </tr>
-                                          <tr>
-                                            <td>Tingkat</td>
-                                            <td>{{$student->level}}</td>
+                                            <td>{{$student->school->name}}</td>
                                           </tr>
                                           <tr>
                                             <td>Angkatan Tahun</td>

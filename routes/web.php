@@ -21,10 +21,6 @@ Route::get('/', function () {
     return redirect()->route('admin.login');
 });
 
-Route::get('surat-keterangan', function () {
-    return view('letter.statement_letter');
-});
-
 Auth::routes();
 
 Route::get('/admin/login', [AdminLoginController::class,'showLoginForm'])->name('admin.login');
@@ -36,6 +32,9 @@ Route::group(['middleware'=>'admin'], function() {
     Route::post('/admin/cari-siswa', [HomeController::class,'searchStudent'])->name('search.student');
     Route::resource('siswa', StudentController::class);
     Route::get('/admin/download-file/{type}/name/{name}', [HomeController::class,'downloadFile'])->name('admin.download');
+    Route::get('surat-keterangan', function () {
+        return view('letter.statement_letter');
+    })->name('statement_letter');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

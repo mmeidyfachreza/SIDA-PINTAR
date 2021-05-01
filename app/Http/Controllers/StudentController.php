@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\School;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class StudentController extends Controller
     public function index()
     {
         $page = "Siswa";
-        $students = Student::paginate();
+        $students = Student::with('school')->where('school_id',auth()->guard('admin')->user()->school_id)->paginate();
         return view('admin.student.index',compact('students','page'));
     }
 
@@ -32,7 +33,13 @@ class StudentController extends Controller
         $genders = array('Laki-laki','Perempuan');
         $levels = array('sd','smp');
         $religions = array('Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu');
-        return view('admin.student.create',compact('page','genders','religions','levels'));
+        if (auth()->guard("web")->check()) {
+            $schools = School::all();
+        }else{
+            $schools = School::find(auth()->guard("admin")->user()->school_id);
+        }
+
+        return view('admin.student.create',compact('page','genders','religions','levels','schools'));
     }
 
     /**

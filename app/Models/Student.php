@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Student extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     protected $casts = [
         'birth_date' => 'date:Y-m-d'
     ];
@@ -25,12 +28,10 @@ class Student extends Model
         'mother_phone',
         'guardian_name',
         'guardian_phone',
-        'school',
-        'level',
+        'school_id',
         'entry_year',
         'graduated_year',
         'certificate',
-        'statement_letter',
     ];
 
     public function setBirthDateAttribute($value)
@@ -40,8 +41,12 @@ class Student extends Model
 
     public function scopeDashboardSearch($querry,$request)
     {
-        return $querry->where('school','like','%'.$request['school'].'%')
-        ->Where('level',$request['level'])
+        return $querry->where('school_id',$request['school_id'])
         ->Where('nis','like','%'.$request['nis'].'%');
+    }
+
+    public function school()
+    {
+       return $this->belongsTo(School::class,'school_id');
     }
 }

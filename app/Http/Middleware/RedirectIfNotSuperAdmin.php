@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class RedirectIfNotAdmin
+class RedirectIfNotSuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -14,11 +14,11 @@ class RedirectIfNotAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard="admin")
+    public function handle($request, Closure $next, $guard="web")
     {
-        if(auth()->guard($guard)->check()||auth()->guard("web")->check()) {
-            return $next($request);
+        if(!auth()->guard($guard)->check()) {
+            return redirect(route('login'));
         }
-        return redirect(route('admin.login'));
+        return $next($request);
     }
 }
