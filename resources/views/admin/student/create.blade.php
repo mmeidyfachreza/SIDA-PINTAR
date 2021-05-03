@@ -58,16 +58,17 @@
                                   </div>
                             </div>
                             <div class="form-group">
+                                <label for="father_name">Nama Orang Tua</label>
+                                <input type="text" class="form-control" id="father_name" name="father_name"
+                                    placeholder="Masukan Nama" required>
+                            </div>
+                            <div class="form-group">
                                 <label>Jenis Kelamin</label>
                                 <select class="form-control select2" style="width: 100%;" name="gender">
                                     @foreach ($genders as $data)
                                     <option value="{{$data}}">{{$data}}</option>
                                     @endforeach
                                 </select>
-                              </div>
-                            <div class="form-group">
-                                <label for="address">Alamat</label>
-                                <textarea class="form-control" id="address" name="address" id="address" cols="30" rows="2" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Agama</label>
@@ -77,11 +78,11 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="father_name">Nama Ayah</label>
-                                <input type="text" class="form-control" id="father_name" name="father_name"
-                                    placeholder="Masukan Nama" required>
+                            {{-- <div class="form-group">
+                                <label for="address">Alamat</label>
+                                <textarea class="form-control" id="address" name="address" id="address" cols="30" rows="2" required></textarea>
                             </div>
+                            
                             <div class="form-group">
                                 <label for="father_phone">Nomor HP Ayah</label>
                                 <input type="text" class="form-control" id="father_phone" name="father_phone"
@@ -97,7 +98,8 @@
                                 <input type="text" class="form-control" id="mother_phone" name="mother_phone"
                                     placeholder="Masukan Nomor HP" required>
                             </div>
-                            <div class="form-group">
+                             --}}
+                             <div class="form-group">
                                 <label for="guardian_name">Nama Wali</label>
                                 <input type="text" class="form-control" id="guardian_name" name="guardian_name"
                                     placeholder="Masukan Nama (tidak wajib)">
@@ -124,7 +126,7 @@
                             </div>
                             @endif
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Tahun Angkatan</label>
                                   <div class="input-group date" id="reservationdate2" data-target-input="nearest">
                                       <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate2" name="entry_year" required/>
@@ -141,6 +143,11 @@
                                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                       </div>
                                   </div>
+                            </div> --}}
+                            <div class="form-group">
+                                <label for="school_year">Tahun Pelajaran</label>
+                                <input type="text" class="form-control" id="school_year" name="school_year"
+                                    placeholder="Masukan Tahun Pelajaran" required>
                             </div>
                             <div class="form-group">
                                 <label for="ijazah">Ijazah</label>

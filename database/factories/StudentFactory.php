@@ -25,18 +25,19 @@ class StudentFactory extends Factory
         return [
             'nis' => $this->faker->numerify('###############'),
             'name' => $this->faker->name,
-            'address' => $this->faker->address,
+            // 'address' => $this->faker->address,
             'birth_place' => $this->faker->city,
             'birth_date' => $this->faker->date(),
             'religion' => $this->faker->randomElement($array = array('Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu')),
-            'gender' => $this->faker->randomElement($array = array("Laki-laki","Perempuan")),
+            'gender' => $this->faker->randomElement($array = array("L","P")),
             'father_name' => $this->faker->name,
-            'father_phone' => $this->faker->numerify('###############'),
-            'mother_name' => $this->faker->name,
-            'mother_phone' => $this->faker->numerify('###############'),
+            // 'father_phone' => $this->faker->numerify('###############'),
+            // 'mother_name' => $this->faker->name,
+            // 'mother_phone' => $this->faker->numerify('###############'),
             'school_id' => $this->faker->numberBetween(1,10),
-            'entry_year' => $this->faker->year(),
-            'graduated_year' => $this->faker->year(),
+            'school_year' => "2020/2021",
+            // 'entry_year' => $this->faker->year(),
+            // 'graduated_year' => $this->faker->year(),
         ];
     }
 }

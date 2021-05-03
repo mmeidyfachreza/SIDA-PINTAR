@@ -35,7 +35,7 @@ class StudentController extends Controller
     public function create()
     {
         $page = "Siswa";
-        $genders = array('Laki-laki','Perempuan');
+        $genders = array('L','P');
         $levels = array('sd','smp');
         $religions = array('Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu');
         if (auth()->guard("admin")->check()) {
@@ -96,7 +96,7 @@ class StudentController extends Controller
     public function edit($id)
     {
         $page = "Siswa";
-        $genders = array('Laki-laki','Perempuan');
+        $genders = array('L','P');
         $levels = array('sd','smp');
         $religions = array('Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu');
         $student = Student::find($id);
@@ -163,5 +163,10 @@ class StudentController extends Controller
         Storage::delete('statement_letters/'.$student->statement_letter);
         $student->delete();
         return redirect()->route('siswa.index')->with('success','Berhasil menghapus data');
+    }
+
+    public function statementLetter(Request $request)
+    {
+        # code...
     }
 }

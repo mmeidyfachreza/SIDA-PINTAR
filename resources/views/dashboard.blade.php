@@ -92,17 +92,21 @@
                                             <td>Nama</td>
                                             <td>{{$student->name}}</td>
                                           </tr>
-                                          <tr>
+                                          {{-- <tr>
                                             <td>Alamat</td>
                                             <td>{{$student->address}}</td>
-                                          </tr>
+                                          </tr> --}}
                                           <tr>
                                             <td>Tempat Lahir</td>
                                             <td>{{$student->birth_place}}</td>
                                           </tr>
                                           <tr>
                                             <td>Tanggal Lahir</td>
-                                            <td>{{$student->birth_date}}</td>
+                                            <td>{{date('Y-m-d', strtotime($student->birth_date))}}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Nama Orang Tua</td>
+                                            <td>{{$student->father_name}}</td>
                                           </tr>
                                           <tr>
                                             <td>Agama</td>
@@ -112,10 +116,7 @@
                                             <td>Jenis Kelamin</td>
                                             <td>{{$student->gender}}</td>
                                           </tr>
-                                          <tr>
-                                            <td>Nama Ayah</td>
-                                            <td>{{$student->father_name}}</td>
-                                          </tr>
+                                          {{-- 
                                           <tr>
                                             <td>Nomor HP Ayah</td>
                                             <td>{{$student->father_phone}}</td>
@@ -128,6 +129,8 @@
                                             <td>Nomor HP Ibu</td>
                                             <td>{{$student->mother_phone}}</td>
                                           </tr>
+                                          
+                                          --}}
                                           <tr>
                                             <td>Nama Wali</td>
                                             <td>{{$student->guardian_name ?? "-"}}</td>
@@ -136,21 +139,34 @@
                                             <td>Nomor HP Wali</td>
                                             <td>{{$student->guardian_phone ?? "-"}}</td>
                                           </tr>
-                                          <tr>
+                                          <tr> 
                                             <td>Asal Sekolah</td>
                                             <td>{{$student->school->name}}</td>
                                           </tr>
-                                          <tr>
+                                          {{-- <tr>
                                             <td>Angkatan Tahun</td>
                                             <td>{{$student->entry_year}}</td>
                                           </tr>
                                           <tr>
                                             <td>Lulus Tahun</td>
                                             <td>{{$student->graduated_year}}</td>
+                                          </tr> --}}
+                                          <tr>
+                                            <td>Tahun Pelajaran</td>
+                                            <td>{{$student->school_year}}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Nomor Ijazah</td>
+                                            <td>{{$student->ijazah_number ?? "data tidak ada"}}</td>
                                           </tr>
                                           <tr>
                                             <td>Ijazah</td>
+                                            @if ($student->ijazah)
                                             <td><a href="{{route('admin.download',['type'=>"certificates",'name'=>$student->ijazah ?? 'default'])}}">Download</a></td>
+                                            @else
+                                            <td>Data tidak ada</td>
+                                            @endif
+                                            
                                           </tr>
                                         </tbody>
                                       </table>

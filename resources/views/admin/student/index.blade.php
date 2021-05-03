@@ -38,9 +38,9 @@
                             <th style="width: 10px">#</th>
                             <th>Nama</th>
                             <th>NIS</th>
-                            <th>Tahun Lulus</th>
-                            <th>Tahun Angkatan</th>
-                            <th>Nama Sekolah</th>
+                            <th>Tahun Pelajaran</th>
+                            <th>Nama Orang Tua</th>
+                            <th>Asal Sekolah</th>
                             <th>Aksi</th>
                           </tr>
                         </thead>
@@ -51,8 +51,8 @@
                                     <td>{{$x++}}</td>
                                     <td>{{$student->name}}</td>
                                     <td>{{$student->nis}}</td>
-                                    <td>{{$student->graduated_year}}</td>
-                                    <td>{{$student->entry_year}}</td>
+                                    <td>{{$student->school_year}}</td>
+                                    <td>{{$student->father_name}}</td>
                                     <td>{{$student->school->name}}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
