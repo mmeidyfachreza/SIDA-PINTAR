@@ -14,12 +14,7 @@ class Admin extends Authenticatable
     protected $dates = ['deleted_at'];
     protected $table = 'admins';
 
-    protected $fillable = ['nip', 'name', 'email', 'password','school_id'];
+    protected $fillable = ['name', 'email', 'password'];
 
     protected $hidden = ['password',  'remember_token'];
-
-    public function school()
-    {
-       return $this->belongsTo(School::class,'school_id');
-    }
 }

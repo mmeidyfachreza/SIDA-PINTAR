@@ -31,7 +31,8 @@ class Student extends Model
         'school_id',
         'entry_year',
         'graduated_year',
-        'certificate',
+        'ijazah',
+        'ijazah_number',
     ];
 
     public function setBirthDateAttribute($value)

@@ -15,12 +15,9 @@ class CreateAdminsTable extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nip',50);
             $table->string('name',50);
             $table->string('email')->unique();
             $table->string('password');
-            $table->bigInteger('school_id')->unsigned()->nullable();
-            $table->foreign('school_id')->references('id')->on('schools')->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
@@ -34,9 +31,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::table('admins', function (Blueprint $table) {
-            $table->dropForeign(['school_id']);
-        });
         Schema::dropIfExists('admins');
     }
 }

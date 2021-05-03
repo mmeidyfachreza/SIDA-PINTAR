@@ -18,7 +18,7 @@
                   <form action="{{route('search.student')}}" method="POST">
                     @csrf
                     <div class="card-body">
-                        @if (auth()->guard("web")->check())
+                        @if (auth()->guard("admin")->check())
                             <div class="form-group">
                                 <label>Nama Sekolah</label>
                                 <select class="form-control select2" style="width: 100%;" name="school_id">
@@ -150,7 +150,7 @@
                                           </tr>
                                           <tr>
                                             <td>Ijazah</td>
-                                            <td><a href="{{route('admin.download',['type'=>"certificates",'name'=>$student->certificate ?? 'default'])}}">Download</a></td>
+                                            <td><a href="{{route('admin.download',['type'=>"certificates",'name'=>$student->ijazah ?? 'default'])}}">Download</a></td>
                                           </tr>
                                         </tbody>
                                       </table>

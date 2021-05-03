@@ -53,12 +53,20 @@
           <i class="far fa-user"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-          <a class="dropdown-item text-center" href="{{ route('logout') }}"
+          <a class="dropdown-item text-center" href="@if (auth()->guard('admin')->check())
+            {{ route('admin.logout') }}
+          @else
+            {{ route('logout') }}
+          @endif"
           onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
             Keluar
           </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        <form id="logout-form" action="@if (auth()->guard('admin')->check())
+            {{ route('admin.logout') }}
+          @else
+            {{ route('logout') }}
+          @endif" method="POST" class="d-none">
             @csrf
         </form>
         </div>

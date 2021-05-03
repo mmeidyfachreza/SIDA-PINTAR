@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +22,17 @@ Route::get('/', function () {
     return redirect()->route('admin.login');
 });
 
+Route::get('/tes', function () {
+    return Storage::download("public/avatars/default.jpg");
+});
+
 Auth::routes();
 
 Route::get('/admin/login', [AdminLoginController::class,'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminLoginController::class,'login'])->name('admin.login.post');
-Route::post('/admin/logout', [AdminLoginController::class,'login'])->name('admin.logout');
+Route::post('/admin/logout', [AdminLoginController::class,'logout'])->name('admin.logout');
 //Admin Home page after login
-Route::group(['middleware'=>'admin'], function() {
+Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::get('/admin/home', [HomeController::class,'index'])->name('admin.home');
     Route::post('/admin/cari-siswa', [HomeController::class,'searchStudent'])->name('search.student');
     Route::resource('siswa', StudentController::class);

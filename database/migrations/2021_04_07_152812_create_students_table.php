@@ -32,7 +32,8 @@ class CreateStudentsTable extends Migration
             $table->foreign('school_id')->references('id')->on('schools')->nullOnDelete();
             $table->string('entry_year');
             $table->string('graduated_year');
-            $table->string('certificate')->nullable();
+            $table->string('ijazah')->nullable();
+            $table->string('ijazah_number')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -30,4 +30,16 @@ class AdminLoginController extends Controller
             return view('auth.admin_login');
         }
     }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('admin/login')
+            ->withSuccess('Terimakasih, selamat datang kembali!');
+    }
 }

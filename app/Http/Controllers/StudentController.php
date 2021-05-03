@@ -18,7 +18,12 @@ class StudentController extends Controller
     public function index()
     {
         $page = "Siswa";
-        $students = Student::with('school')->where('school_id',auth()->guard('admin')->user()->school_id)->paginate();
+        if (auth()->guard("admin")->check()) {
+            $students = Student::with('school')->paginate();
+        }else{
+            $students = Student::with('school')->where('school_id',auth()->guard('admin')->user()->school_id)->paginate();
+        }
+
         return view('admin.student.index',compact('students','page'));
     }
 
@@ -33,7 +38,7 @@ class StudentController extends Controller
         $genders = array('Laki-laki','Perempuan');
         $levels = array('sd','smp');
         $religions = array('Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu');
-        if (auth()->guard("web")->check()) {
+        if (auth()->guard("admin")->check()) {
             $schools = School::all();
         }else{
             $schools = School::find(auth()->guard("admin")->user()->school_id);
@@ -53,10 +58,10 @@ class StudentController extends Controller
         DB::beginTransaction();
         try {
             $student = Student::create($request->all());
-            if ($certificate = $request->file('certificate')) {
-                $name = time().'.'.$certificate->getClientOriginalExtension();
-                $student->certificate = $name;
-                $certificate = $request->certificate->storeAs('public/certificates',$name);
+            if ($ijazah = $request->file('ijazah')) {
+                $name = time().'.'.$ijazah->getClientOriginalExtension();
+                $student->ijazah = $name;
+                $ijazah = $request->ijazah->storeAs('ijazah',$name);
                 $student->save();
             }
             DB::commit();
@@ -111,11 +116,11 @@ class StudentController extends Controller
         DB::beginTransaction();
         try {
             $student = Student::findOrFail($id);
-            if ($certificates = $request->file('certificate')) {
-                Storage::delete('certificates/'.$student->certificate);
-                $name = time().'.'.$certificates->getClientOriginalExtension();
+            if ($ijazah = $request->file('ijazah')) {
+                Storage::delete('ijazah/'.$student->certificate);
+                $name = time().'.'.$ijazah->getClientOriginalExtension();
                 $student->certificate = $name;
-                $certificate = $request->certificate->storeAs('public/certificates',$name);
+                $request->certificate->storeAs('ijazah',$name);
             }
             $student->nis = $request->nis;
             $student->name = $request->name;
@@ -130,11 +135,10 @@ class StudentController extends Controller
             $student->mother_phone = $request->mother_phone;
             $student->guardian_name = $request->guardian_name;
             $student->guardian_phone = $request->guardian_phone;
-            $student->school = $request->school;
             $student->entry_year = $request->entry_year;
             $student->graduated_year = $request->graduated_year;
-            $student->certificate = $request->certificate;
-            $student->statement_letter = $request->statement_letter;
+            $student->ijazah = $request->ijazah;
+            $student->ijazah_number = $request->ijazah_number;
             $student->update();
             DB::commit();
             // all good

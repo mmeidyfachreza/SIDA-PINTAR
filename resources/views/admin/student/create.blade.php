@@ -107,7 +107,7 @@
                                 <input type="text" class="form-control" id="guardian_phone" name="guardian_phone"
                                     placeholder="Masukan Nomor HP (tidak wajib)">
                             </div>
-                            @if (auth()->guard("web")->check())
+                            @if (auth()->guard("admin")->check())
                             <div class="form-group">
                                 <label>Nama Sekolah</label>
                                 <select class="form-control select2" style="width: 100%;" name="school_id">
@@ -143,14 +143,19 @@
                                   </div>
                             </div>
                             <div class="form-group">
-                                <label for="certificate">Ijazah</label>
+                                <label for="ijazah">Ijazah</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="certificate" name="certificate">
-                                        <label class="custom-file-label" for="certificate">Pilih file</label>
+                                        <input type="file" class="custom-file-input" id="ijazah" name="ijazah">
+                                        <label class="custom-file-label" for="ijazah">Pilih file</label>
                                     </div>
                                 </div>
                                 <br>
+                            </div>
+                            <div class="form-group">
+                                <label for="ijazah_number">Nomor Ijazah</label>
+                                <input type="text" class="form-control" id="ijazah_number" name="ijazah_number"
+                                    placeholder="Masukan Nomor Ijazah">
                             </div>
                         </div>
                         <!-- /.card-body -->
