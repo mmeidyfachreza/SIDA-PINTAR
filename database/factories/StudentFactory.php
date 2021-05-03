@@ -37,7 +37,7 @@ class StudentFactory extends Factory
             'school_id' => $this->faker->numberBetween(1,10),
             'school_year' => "2020/2021",
             // 'entry_year' => $this->faker->year(),
-            // 'graduated_year' => $this->faker->year(),
+            'graduated_year' => $this->faker->year(),
         ];
     }
 }

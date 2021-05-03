@@ -27,11 +27,11 @@ class CreateStudentsTable extends Migration
             // $table->string('mother_name');
             // $table->string('mother_phone');
             $table->string('guardian_name')->nullable();
-            $table->string('guardian_phone')->nullable();
+            // $table->string('guardian_phone')->nullable();
             $table->bigInteger('school_id')->unsigned()->nullable();
             $table->foreign('school_id')->references('id')->on('schools')->nullOnDelete();
             // $table->string('entry_year');
-            // $table->string('graduated_year');
+            $table->string('graduated_year');
             $table->string('school_year');
             $table->string('ijazah')->nullable();
             $table->string('ijazah_number')->nullable();

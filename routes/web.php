@@ -37,9 +37,7 @@ Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::post('/admin/cari-siswa', [HomeController::class,'searchStudent'])->name('search.student');
     Route::resource('siswa', StudentController::class);
     Route::get('/admin/download-file/{type}/name/{name}', [HomeController::class,'downloadFile'])->name('admin.download');
-    Route::get('surat-keterangan', function () {
-        return view('letter.statement_letter');
-    })->name('statement_letter');
+    Route::get('surat-keterangan/{id}', [StudentController::class,'statementLetter'])->name('statement_letter');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

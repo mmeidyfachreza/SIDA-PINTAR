@@ -19,42 +19,42 @@
     </div>
     <br><br>
     <div>
-        <p>Yang bertanda tangan di bawah ini, Kepala Sekolah SD  Negeri 001 Bontang Utara dengan ini menyatakan bahwa :</p>
+        <p>Yang bertanda tangan di bawah ini, Kepala Sekolah {{$student->school->name}} dengan ini menyatakan bahwa :</p>
     </div>
     <br>
     <div>
         <table>
                 <tr>
                     <th>Nama </th>
-                    <td>: Muhammad Meidy</td>
+                    <td>: {{$student->name}}</td>
                 </tr>
                 <tr>
                     <th>Tempat, Tanggal lahir </th>
-                    <td>: Samarinda, 02-05-2029</td>
+                    <td>: {{$student->birth_place}}, {{date('Y-m-d', strtotime($student->birth_date))}}</td>
                 </tr>
                 <tr>
                     <th>Nama Orang Tua </th>
-                    <td>: Sumini</td>
+                    <td>: {{$student->father_name}}</td>
                 </tr>
                 <tr>
                     <th>Jenis Kelamin </th>
-                    <td>: Laki-laki</td>
+                    <td>: {{$student->gender}}</td>
                 </tr>
                 <tr>
                     <th>Agama </th>
-                    <td>: Islam</td>
+                    <td>: {{$student->religion}}</td>
                 </tr>
         </table>
     </div>
     <br>
     <div>
-        <p>Dengan ini menerangkan bahwa nama yang tersebut diatas benar telah menamatkan pendidikan di Sekolah SD Negeri 001 Bontang Utara pada tahun 2010 dengan nomor Ijazah DN-01 A 1234567.
+        <p>Dengan ini menerangkan bahwa nama yang tersebut diatas benar telah menamatkan pendidikan di Sekolah {{$student->school->name}} pada tahun {{$student->graduated_year}} dengan nomor Ijazah {{$student->ijazah_number}}.
             Demikian surat keterangan ini dibuat sebagai pengganti Ijazah yang sah.</p>
     </div>
     <br>
     <div class="text-right">
-        <p>Bontang,  Desember 2021 &nbsp;&nbsp;</p>
-        <p>Kepala SDN 001 Bontang Utara</p>
+        <p>Bontang, .... ............ ...... &nbsp;&nbsp;</p>
+        <p>Kepala {{$student->school->name}}</p>
     </div>
 </body>
 </html>

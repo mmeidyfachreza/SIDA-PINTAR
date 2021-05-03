@@ -135,10 +135,10 @@
                                             <td>Nama Wali</td>
                                             <td>{{$student->guardian_name ?? "-"}}</td>
                                           </tr>
-                                          <tr>
+                                          {{-- <tr>
                                             <td>Nomor HP Wali</td>
                                             <td>{{$student->guardian_phone ?? "-"}}</td>
-                                          </tr>
+                                          </tr> --}}
                                           <tr> 
                                             <td>Asal Sekolah</td>
                                             <td>{{$student->school->name}}</td>
@@ -147,10 +147,11 @@
                                             <td>Angkatan Tahun</td>
                                             <td>{{$student->entry_year}}</td>
                                           </tr>
-                                          <tr>
+                                           --}}
+                                           <tr>
                                             <td>Lulus Tahun</td>
                                             <td>{{$student->graduated_year}}</td>
-                                          </tr> --}}
+                                          </tr>
                                           <tr>
                                             <td>Tahun Pelajaran</td>
                                             <td>{{$student->school_year}}</td>

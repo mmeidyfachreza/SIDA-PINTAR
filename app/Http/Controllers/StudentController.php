@@ -99,8 +99,13 @@ class StudentController extends Controller
         $genders = array('L','P');
         $levels = array('sd','smp');
         $religions = array('Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu');
+        if (auth()->guard("admin")->check()) {
+            $schools = School::all();
+        }else{
+            $schools = School::find(auth()->guard("admin")->user()->school_id);
+        }
         $student = Student::find($id);
-        return view('siswa.edit',compact('student','page','genders','levels','religions'));
+        return view('admin.student.edit',compact('student','page','genders','levels','religions','schools'));
     }
 
     /**
@@ -165,8 +170,9 @@ class StudentController extends Controller
         return redirect()->route('siswa.index')->with('success','Berhasil menghapus data');
     }
 
-    public function statementLetter(Request $request)
+    public function statementLetter($id)
     {
-        # code...
+        $student = Student::with('school')->find($id);
+        return view('letter.statement_letter',compact('student'));
     }
 }
