@@ -84,7 +84,7 @@ class StudentController extends Controller
     {
         $page = "Siswa";
         $student = Student::find($id);
-        return view('siswa.show',compact('student','page'));
+        return view('admin.student.show',compact('student','page'));
     }
 
     /**
