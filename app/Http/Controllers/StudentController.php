@@ -59,7 +59,7 @@ class StudentController extends Controller
         try {
             $student = Student::create($request->all());
             if ($ijazah = $request->file('ijazah')) {
-                $name = time().'.'.$ijazah->getClientOriginalExtension();
+                $name = $request->name.'-'.time().'.'.$ijazah->getClientOriginalExtension();
                 $student->ijazah = $name;
                 $ijazah = $request->ijazah->storeAs('ijazah',$name);
                 $student->save();
@@ -122,34 +122,34 @@ class StudentController extends Controller
         try {
             $student = Student::findOrFail($id);
             if ($ijazah = $request->file('ijazah')) {
-                Storage::delete('ijazah/'.$student->certificate);
-                $name = time().'.'.$ijazah->getClientOriginalExtension();
-                $student->certificate = $name;
-                $request->certificate->storeAs('ijazah',$name);
+                Storage::delete('ijazah/'.$student->ijazah);
+                $name = $request->name.'-'.time().'.'.$ijazah->getClientOriginalExtension();
+                $student->ijazah = $name;
+                $request->ijazah->storeAs('ijazah',$name);
             }
             $student->nis = $request->nis;
             $student->name = $request->name;
-            $student->address = $request->address;
+            // $student->address = $request->address;
             $student->birth_place = $request->birth_place;
             $student->birth_date = $request->birth_date;
             $student->religion = $request->religion;
             $student->gender = $request->gender;
             $student->father_name = $request->father_name;
-            $student->father_phone = $request->father_phone;
-            $student->mother_name = $request->mother_name;
-            $student->mother_phone = $request->mother_phone;
+            // $student->father_phone = $request->father_phone;
+            // $student->mother_name = $request->mother_name;
+            // $student->mother_phone = $request->mother_phone;
             $student->guardian_name = $request->guardian_name;
-            $student->guardian_phone = $request->guardian_phone;
-            $student->entry_year = $request->entry_year;
+            // $student->guardian_phone = $request->guardian_phone;
+            // $student->entry_year = $request->entry_year;
             $student->graduated_year = $request->graduated_year;
-            $student->ijazah = $request->ijazah;
             $student->ijazah_number = $request->ijazah_number;
+            
             $student->update();
             DB::commit();
             // all good
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('siswa.edit',$id)->withErrors(['message'=>$e->getLine()]);
+            return redirect()->route('siswa.edit',$id)->withErrors(['message'=>$e->getMessage]);
         }
 
         return redirect()->route('siswa.index')->with('success','Berhasil merubah data');
@@ -164,8 +164,7 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $student = Student::find($id);
-        Storage::delete('certificates/'.$student->certificate);
-        Storage::delete('statement_letters/'.$student->statement_letter);
+        Storage::delete('ijazah/'.$student->ijazah);
         $student->delete();
         return redirect()->route('siswa.index')->with('success','Berhasil menghapus data');
     }

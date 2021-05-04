@@ -102,7 +102,7 @@
                                           </tr>
                                           <tr>
                                             <td>Tanggal Lahir</td>
-                                            <td>{{date('Y-m-d', strtotime($student->birth_date))}}</td>
+                                            <td>{{date('d-m-Y', strtotime($student->birth_date))}}</td>
                                           </tr>
                                           <tr>
                                             <td>Nama Orang Tua</td>

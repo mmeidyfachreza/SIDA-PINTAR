@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <th>Tempat, Tanggal lahir </th>
-                    <td>: {{$student->birth_place}}, {{date('Y-m-d', strtotime($student->birth_date))}}</td>
+                    <td>: {{$student->birth_place}}, {{date('d-m-Y', strtotime($student->birth_date))}}</td>
                 </tr>
                 <tr>
                     <th>Nama Orang Tua </th>
@@ -53,7 +53,7 @@
     </div>
     <br>
     <div class="text-right">
-        <p>Bontang, .... ............ ...... &nbsp;&nbsp;</p>
+        <p>Bontang, {{date('d M Y', strtotime($student->birth_date))}} &nbsp;&nbsp;</p>
         <p>Kepala {{$student->school->name}}</p>
     </div>
 </body>

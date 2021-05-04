@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label>Tanggal Lahir</label>
                                   <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="birth_date" placeholder="dd/mm/yyyy" value="{{old('birth_date',date('DD/MM/YYYY', strtotime($student->birth_date)))}}" required/>
+                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="birth_date" placeholder="dd/mm/yyyy" value="{{old('birth_date',date('d/m/Y', strtotime($student->birth_date)))}}" required/>
                                       <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                       </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="father_name">Nama Orang Tua</label>
-                                <input type="text" class="form-control" id="father_name" name="father_name" {{old('father_name', $student->father_name)}}
+                                <input type="text" class="form-control" id="father_name" name="father_name" value="{{old('father_name', $student->father_name)}}"
                                     placeholder="Masukan Nama" required>
                             </div>
                             <div class="form-group">
@@ -102,7 +102,7 @@
                              --}}
                              <div class="form-group">
                                 <label for="guardian_name">Nama Wali</label>
-                                <input type="text" class="form-control" id="guardian_name" name="guardian_name" {{old('guardian_name', $student->guardian_name)}}
+                                <input type="text" class="form-control" id="guardian_name" name="guardian_name" value="{{old('guardian_name', $student->guardian_name)}}"
                                     placeholder="Masukan Nama (tidak wajib)">
                             </div>
                             {{-- <div class="form-group">
@@ -139,7 +139,7 @@
                             <div class="form-group">
                                 <label>Tahun Lulus</label>
                                   <div class="input-group date" id="reservationdate3" data-target-input="nearest">
-                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate3" name="graduated_year" {{old('graduated_year', $student->graduated_year)}} required/>
+                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate3" name="graduated_year" value="{{old('graduated_year', $student->graduated_year)}}" required/>
                                       <div class="input-group-append" data-target="#reservationdate3" data-toggle="datetimepicker">
                                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                       </div>
@@ -147,7 +147,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="school_year">Tahun Pelajaran</label>
-                                <input type="text" class="form-control" id="school_year" name="school_year" {{old('school_year', $student->school_year)}}
+                                <input type="text" class="form-control" id="school_year" name="school_year" value="{{old('school_year', $student->school_year)}}"
                                     placeholder="Masukan Tahun Pelajaran" required>
                             </div>
                             <div class="form-group">
@@ -155,14 +155,14 @@
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="ijazah" name="ijazah">
-                                        <label class="custom-file-label" for="ijazah">Pilih file</label>
+                                        <label class="custom-file-label" for="ijazah">{{$student->ijazah ?? "Pilih File"}}</label>
                                     </div>
                                 </div>
                                 <br>
                             </div>
                             <div class="form-group">
                                 <label for="ijazah_number">Nomor Ijazah</label>
-                                <input type="text" class="form-control" id="ijazah_number" name="ijazah_number" {{old('ijazah_number', $student->ijazah_number)}}
+                                <input type="text" class="form-control" id="ijazah_number" name="ijazah_number" value="{{old('ijazah_number', $student->ijazah_number)}}"
                                     placeholder="Masukan Nomor Ijazah">
                             </div>
                         </div>

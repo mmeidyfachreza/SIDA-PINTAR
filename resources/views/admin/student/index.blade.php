@@ -56,16 +56,15 @@
                                     <td>{{$student->school->name}}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a class="btn btn-warning" href="{{route('siswa.edit',$student->id)}}"><i
-                                                    class="c-icon c-icon-1xl cil-pencil"></i></a>
-                                            {{-- <a class="btn btn-info" href="{{route('siswa.show',$student->id)}}"><i class="fa fa-eye"></i></a>
-                                            
+                                            <a class="btn btn-info" href="{{route('siswa.show',$student->id)}}"><i class="fa fa-eye"></i></a>
+                                            <a class="btn btn-warning" href="{{route('siswa.edit',$student->id)}}"><i
+                                                    class="fa fa-pen"></i></a>
                                             <form action="{{route('siswa.destroy',$student->id)}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger delete-data" type="submit"><i
-                                                        class="c-icon c-icon-1xl cil-trash"></i></button>
-                                            </form> --}}
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
                                             <a class="btn btn-info" href="{{route('statement_letter',$student->id)}}" target="_blank"><i class="fa fa-file"></i></a>
                                         </div>
                                     </td>
