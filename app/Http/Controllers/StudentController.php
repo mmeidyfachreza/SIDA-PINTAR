@@ -102,6 +102,14 @@ class StudentController extends Controller
             return redirect()->route('siswa.create')->withErrors(['message'=>$e->getMessage()]);
         }
 
+        if (auth()->guard('admin')->check()) {
+            if (School::where("id",$request->school_id)->where("level","sd")) {
+                return redirect()->route('student.sd')->with('success','Berhasil menambah data');
+            }elseif(School::where("id",$request->school_id)->where("level","smp")){
+                return redirect()->route('student.smp')->with('success','Berhasil menambah data');
+            }
+        }
+
         return redirect()->route('siswa.index')->with('success','Berhasil menambah data');
     }
 
@@ -187,6 +195,14 @@ class StudentController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('siswa.edit',$id)->withErrors(['message'=>$e->getMessage]);
+        }
+
+        if (auth()->guard('admin')->check()) {
+            if (School::where("id",$request->school_id)->where("level","sd")) {
+                return redirect()->route('student.sd')->with('success','Berhasil merubah data');
+            }elseif(School::where("id",$request->school_id)->where("level","smp")){
+                return redirect()->route('student.smp')->with('success','Berhasil merubah data');
+            }
         }
 
         return redirect()->route('siswa.index')->with('success','Berhasil merubah data');
