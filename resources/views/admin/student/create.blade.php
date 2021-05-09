@@ -36,22 +36,22 @@
                             <div class="form-group">
                                 <label for="nisn">NISN</label>
                                 <input type="text" class="form-control" id="nisn" name="nisn"
-                                    placeholder="Masukan NIS" required>
+                                    placeholder="Masukan NIS" value="{{old('nisn')}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="name">Nama</label>
                                 <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Masukan Nama" required>
+                                    placeholder="Masukan Nama" value="{{old('name')}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="birth_place">Tempat Lahir</label>
                                 <input type="text" class="form-control" id="birth_place" name="birth_place"
-                                    placeholder="Masukan Tempat Lahir" required>
+                                    placeholder="Masukan Tempat Lahir" value="{{old('birth_place')}}" required>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Lahir</label>
                                   <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="birth_date" placeholder="dd/mm/yyyy" required/>
+                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="birth_date" placeholder="dd/mm/yyyy" value="{{old('birth_date')}}" required/>
                                       <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                       </div>
@@ -60,21 +60,21 @@
                             <div class="form-group">
                                 <label for="father_name">Nama Orang Tua</label>
                                 <input type="text" class="form-control" id="father_name" name="father_name"
-                                    placeholder="Masukan Nama" required>
+                                    placeholder="Masukan Nama" value="{{old('father_name')}}" required>
                             </div>
                             <div class="form-group">
                                 <label>Jenis Kelamin</label>
                                 <select class="form-control select2" style="width: 100%;" name="gender">
-                                    @foreach ($genders as $data)
-                                    <option value="{{$data}}">{{$data}}</option>
+                                    @foreach ($genders as $gender)
+                                    <option value="{{$gender}}" {{ $gender == old('gender') ? 'selected' : '' }}>{{$gender}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Agama</label>
                                 <select class="form-control select2" style="width: 100%;" name="religion">
-                                    @foreach ($religions as $data)
-                                    <option value="{{$data}}">{{$data}}</option>
+                                    @foreach ($religions as $religion)
+                                    <option value="{{$religion}}" {{ $religion == old('religion') ? 'selected' : '' }}>{{$religion}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -102,7 +102,7 @@
                              <div class="form-group">
                                 <label for="guardian_name">Nama Wali</label>
                                 <input type="text" class="form-control" id="guardian_name" name="guardian_name"
-                                    placeholder="Masukan Nama (tidak wajib)">
+                                    placeholder="Masukan Nama (tidak wajib)" value="{{old('guardian_name')}}">
                             </div>
                             {{-- <div class="form-group">
                                 <label for="guardian_phone">Nomor HP Wali</label>
@@ -113,8 +113,8 @@
                             <div class="form-group">
                                 <label>Nama Sekolah</label>
                                 <select class="form-control select2" style="width: 100%;" name="school_id">
-                                    @foreach ($schools as $data)
-                                        <option value="{{$data->id}}">{{$data->name}}</option>
+                                    @foreach ($schools as $school)
+                                        <option value="{{$school->id}}" {{ $school->id === old('school_id') ? 'selected' : '' }}>{{$school->name}}</option>
                                         @endforeach
                                 </select>
                             </div>
@@ -139,7 +139,7 @@
                              <div class="form-group">
                                 <label>Tahun Lulus</label>
                                   <div class="input-group date" id="reservationdate3" data-target-input="nearest">
-                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate3" name="graduated_year" required/>
+                                      <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate3" name="graduated_year" value="{{old('graduated_year')}}" required/>
                                       <div class="input-group-append" data-target="#reservationdate3" data-toggle="datetimepicker">
                                           <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                       </div>
@@ -148,7 +148,7 @@
                             <div class="form-group">
                                 <label for="school_year">Tahun Pelajaran</label>
                                 <input type="text" class="form-control" id="school_year" name="school_year"
-                                    placeholder="Masukan Tahun Pelajaran" required>
+                                    placeholder="Masukan Tahun Pelajaran" value="{{old('school_year')}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="ijazah">Ijazah</label>
@@ -162,7 +162,7 @@
                             <div class="form-group">
                                 <label for="ijazah_number">Nomor Ijazah</label>
                                 <input type="text" class="form-control" id="ijazah_number" name="ijazah_number"
-                                    placeholder="Masukan Nomor Ijazah" required>
+                                    placeholder="Masukan Nomor Ijazah" value="{{old('ijazah_number')}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="ijazah">Foto Siswa</label>

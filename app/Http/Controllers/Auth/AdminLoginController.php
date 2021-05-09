@@ -35,22 +35,22 @@ class AdminLoginController extends Controller
     public function login(Request $request)
     {
     $this->validate($request, [
-        'npsn' => 'required|string', //VALIDASI KOLOM USERNAME
+        'username' => 'required', //VALIDASI KOLOM USERNAME
         //TAPI KOLOM INI BISA BERISI EMAIL ATAU USERNAME
         'password' => 'required|string|min:6',
     ]);
 
     //LAKUKAN LOGIN
-    if (Auth::guard('admin')->attempt(['npsn' => $request->npsn, 'password' => $request->password])) {
+    if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
         //JIKA BERHASIL, MAKA REDIRECT KE HALAMAN HOME
         return redirect()->route('admin.home');
     }
     //JIKA SALAH, MAKA KEMBALI KE LOGIN DAN TAMPILKAN NOTIFIKASI
     throw ValidationException::withMessages([
-        'npsn' => ['NPSN/Password salah.'],
+        'username' => ['Username/Password salah.'],
     ]);
 
-    return redirect()->route('admin.login')->with(['npsn' => 'Email/Password salah!']);
+    return redirect()->route('admin.login')->with(['username' => 'Username/Password salah!']);
     }
 
     public function logout(Request $request)

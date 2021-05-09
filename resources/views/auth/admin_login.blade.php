@@ -32,13 +32,13 @@
       <form method="POST" action="{{ route('admin.login.post') }}">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Masukan NPSN" value="{{ old('npsn') }}" name="npsn" required autocomplete="npsn" autofocus>
+          <input type="text" class="form-control" placeholder="Masukan Username" value="{{ old('username') }}" name="username" required autocomplete="username" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+              <span class="fas fa-user"></span>
             </div>
           </div>
-          @error('npsn')
+          @error('username')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

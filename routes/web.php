@@ -23,11 +23,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/siswa', function () {
+Route::get('guest/siswa', function () {
     return view('student');
 })->name('student');
 
-Route::post('/siswa/pencarian', [GuestController::class,'search'])->name('search');
+Route::post('guest/siswa/pencarian', [GuestController::class,'search'])->name('search');
 
 Route::get('/tes', function () {
     return Storage::download("public/avatars/default.jpg");
