@@ -33,6 +33,7 @@
                 <th>Tahun Pelajaran</th>
                 <th>Nama Orang Tua</th>
                 <th>Asal Sekolah</th>
+                <th>Nomor Ijazah</th>
               </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@
                         <td>{{$student->school_year}}</td>
                         <td>{{$student->father_name}}</td>
                         <td>{{$student->school->name}}</td>
+                        <td>{{$student->ijazah_number}}</td>
                     </tr>
                 @endforeach
             </tbody>
