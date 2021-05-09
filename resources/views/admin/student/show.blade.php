@@ -144,7 +144,15 @@
                               <!-- /.tab-content -->
                             </div><!-- /.card-body -->
                             <div class="card-footer">
-                            <a href="{{route('siswa.index')}}" class="btn btn-danger">Kembali</a>
+                            @if (auth()->guard('admin')->check())
+                                @if ($student->school->level=="sd")
+                                    <a href="{{route('srudent.sd')}}" class="btn btn-danger">Kembali</a>
+                                @elseif ($student->school->level=="smp")
+                                    <a href="{{route('student.smp')}}" class="btn btn-danger">Kembali</a>
+                                @endif
+                            @else
+                                <a href="{{route('siswa.index')}}" class="btn btn-danger">Kembali</a>
+                            @endif
                         </div>
                           </div>
                           <!-- /.card -->

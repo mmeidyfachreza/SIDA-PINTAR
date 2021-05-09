@@ -157,6 +157,7 @@ class StudentController extends Controller
     public function update(UpdateStudentRequest $request, $id)
     {
         $page = "Siswa";
+        dd("asdad");
         DB::beginTransaction();
         try {
             $student = Student::findOrFail($id);
@@ -194,10 +195,12 @@ class StudentController extends Controller
             // all good
         } catch (\Exception $e) {
             DB::rollback();
+            dd("asdad");
             return redirect()->route('siswa.edit',$id)->withErrors(['message'=>$e->getMessage]);
         }
 
         if (auth()->guard('admin')->check()) {
+            dd("ini admin");
             if (School::where("id",$request->school_id)->where("level","sd")) {
                 return redirect()->route('student.sd')->with('success','Berhasil merubah data');
             }elseif(School::where("id",$request->school_id)->where("level","smp")){
@@ -217,8 +220,17 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $student = Student::find($id);
+        $schoolId = $student->school_id;
         Storage::delete('ijazah/'.$student->ijazah);
+        Storage::delete('photos/'.$student->photo);
         $student->delete();
+        if (auth()->guard('admin')->check()) {
+            if (School::where("id",$schoolId)->where("level","sd")) {
+                return redirect()->route('student.sd')->with('success','Berhasil menghapus data');
+            }elseif(School::where("id",$schoolId)->where("level","smp")){
+                return redirect()->route('student.smp')->with('success','Berhasil menghapus data');
+            }
+        }
         return redirect()->route('siswa.index')->with('success','Berhasil menghapus data');
     }
 
