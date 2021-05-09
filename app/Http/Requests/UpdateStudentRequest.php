@@ -33,7 +33,7 @@ class UpdateStudentRequest extends FormRequest
             'father_name'=> 'required',
             'school_id'=> 'required|integer',
             'graduated_year' => 'required|date_format:Y',
-            'school_year' => 'required|date_format:Y/Y',
+            'school_year' => 'required',
             'ijazah' => 'mimes:pdf|max:2048',
             'ijazah_number'=> 'required',
             'photo' => 'mimes:png,jpeg,jpg|max:2048',
@@ -58,7 +58,6 @@ class UpdateStudentRequest extends FormRequest
             'nisn.unique' => 'NISN sudah terdaftar, silahkan gunakan NISN lain',
             'birth_date.date_format' => 'Format tanggal lahir salah',
             'graduated_year.date_format' => 'Format tahun lulus salah',
-            'school_year.date_format' => 'Format tahun ajaran salah',
 
             'ijazah.mimes' => 'Format file ijazah harus pdf',
             'photo.mimes' => 'Format file foto harus png,jpeg atau jpg',
