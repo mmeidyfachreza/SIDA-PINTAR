@@ -33,7 +33,7 @@ class StoreStudentRequest extends FormRequest
             'father_name'=> 'required',
             'school_id'=> 'required|integer',
             'graduated_year' => 'required|date_format:Y',
-            'school_year' => 'required|date_format:Y',
+            'school_year' => 'required|date_format:Y/Y',
             'ijazah' => 'required|mimes:pdf|max:2048',
             'ijazah_number'=> 'required',
             'photo' => 'mimes:png,jpeg,jpg|max:2048',
