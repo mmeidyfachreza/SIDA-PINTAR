@@ -50,7 +50,7 @@
                                 <tr>
                                     <td>{{$x++}}</td>
                                     <td>{{$student->name}}</td>
-                                    <td>{{$student->nisn}}</td>
+                                    <td>{{$student->nis}}</td>
                                     <td>{{$student->school_year}}</td>
                                     <td>{{$student->father_name}}</td>
                                     <td>{{$student->school->name}}</td>

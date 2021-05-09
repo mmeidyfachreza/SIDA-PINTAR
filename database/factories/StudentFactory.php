@@ -23,7 +23,7 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            'nis' => $this->faker->numerify('###############'),
+            'nisn' => $this->faker->numerify('###############'),
             'name' => $this->faker->name,
             // 'address' => $this->faker->address,
             'birth_place' => $this->faker->city,

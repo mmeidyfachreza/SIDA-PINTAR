@@ -17,6 +17,9 @@ class CreateSchoolsTable extends Migration
             $table->id();
             $table->string('name',100);
             $table->enum('level',['sd','smp','sma','smk']);
+            $table->string('headmaster',100)->nullable();
+            $table->string('nip',100)->nullable();
+            $table->string('letterhead')->nullable();
             $table->timestamps();
         });
     }

@@ -35,8 +35,8 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="nis">NIS</label>
-                                <input type="text" class="form-control" id="nis" name="nis" value="{{old('nis', $student->nis)}}"
+                                <label for="nisn">NISN</label>
+                                <input type="text" class="form-control" id="nisn" name="nisn" value="{{old('nisn', $student->nisn)}}"
                                     placeholder="Masukan NIS" required>
                             </div>
                             <div class="form-group">
@@ -83,7 +83,7 @@
                                 <label for="address">Alamat</label>
                                 <textarea class="form-control" id="address" name="address" id="address" cols="30" rows="2" required></textarea>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="father_phone">Nomor HP Ayah</label>
                                 <input type="text" class="form-control" id="father_phone" name="father_phone"
@@ -163,7 +163,18 @@
                             <div class="form-group">
                                 <label for="ijazah_number">Nomor Ijazah</label>
                                 <input type="text" class="form-control" id="ijazah_number" name="ijazah_number" value="{{old('ijazah_number', $student->ijazah_number)}}"
-                                    placeholder="Masukan Nomor Ijazah">
+                                    placeholder="Masukan Nomor Ijazah" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ijazah">Foto Siswa</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input class="custom-file-input" type="file" accept="image/*" name="photo" onchange="preview_image(event)">
+                                        <label class="custom-file-label" for="photo">Pilih file</label>
+                                    </div>
+                                </div>
+                                <br>
+                                <img style="width:30%" id="output_image" src="{{asset('storage/photos/'.$student->photo)}}"/>
                             </div>
                         </div>
                         <!-- /.card-body -->

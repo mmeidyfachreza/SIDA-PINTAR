@@ -52,8 +52,8 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                           <tr>
-                                            <td>NISN</td>
-                                            <td>{{$student->nisn}}</td>
+                                            <td>NIS</td>
+                                            <td>{{$student->nis}}</td>
                                           </tr>
                                           <tr>
                                             <td>Nama</td>
@@ -83,7 +83,7 @@
                                             <td>Jenis Kelamin</td>
                                             <td>{{$student->gender}}</td>
                                           </tr>
-                                          {{--
+                                          {{-- 
                                           <tr>
                                             <td>Nomor HP Ayah</td>
                                             <td>{{$student->father_phone}}</td>
@@ -96,7 +96,7 @@
                                             <td>Nomor HP Ibu</td>
                                             <td>{{$student->mother_phone}}</td>
                                           </tr>
-
+                                          
                                           --}}
                                           <tr>
                                             <td>Nama Wali</td>
@@ -106,7 +106,7 @@
                                             <td>Nomor HP Wali</td>
                                             <td>{{$student->guardian_phone ?? "-"}}</td>
                                           </tr> --}}
-                                          <tr>
+                                          <tr> 
                                             <td>Asal Sekolah</td>
                                             <td>{{$student->school->name}}</td>
                                           </tr>
@@ -134,7 +134,7 @@
                                             @else
                                             <td>Data tidak ada</td>
                                             @endif
-
+                                            
                                           </tr>
                                         </tbody>
                                       </table>

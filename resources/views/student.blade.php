@@ -14,35 +14,46 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('assets/dist/css/adminlte.min.css')}}"">
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
+<body class="hold-transition login-page" style="height: 70vh">
+<div class="login-box" style="width: 80%">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
       <a href="#" class="h1"><b>SIDA</b>PINTAR</a>
     </div>
     <div class="card-body">
-        <p class="login-box-msg">Pencarian Data Siswa</p>
+        <p class="login-box-msg">Hasil Pencarian Siswa Berdasarkan NISN</p>
 
-        <form action="{{route('search')}}" method="post">
-            @csrf
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Masukan NISN Siswa" name="nisn" required>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
-          <div class="social-auth-links text-center mt-2 mb-3">
-            <button type="submit" class="btn btn-block btn-default">Cari</button>
-            <a href="{{route('login')}}" class="btn btn-block btn-primary">
-                Login
-            </a>
-          </div>
-        </form>
-      </div>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th style="width: 10px">#</th>
+                <th>Nama</th>
+                <th>NIS</th>
+                <th>Tahun Pelajaran</th>
+                <th>Nama Orang Tua</th>
+                <th>Asal Sekolah</th>
+              </tr>
+            </thead>
+            <tbody>
+                <?php $x=1?>
+                @foreach ($students as $student)
+                    <tr>
+                        <td>{{$x++}}</td>
+                        <td>{{$student->name}}</td>
+                        <td>{{$student->nisn}}</td>
+                        <td>{{$student->school_year}}</td>
+                        <td>{{$student->father_name}}</td>
+                        <td>{{$student->school->name}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+          </table>
+    </div>
     <!-- /.card-body -->
+    <div class="card-footer">
+        <a href="{{url('/')}}" class="btn btn-danger btn-block">Kembali</a>
+    </div>
   </div>
   <!-- /.card -->
 </div>

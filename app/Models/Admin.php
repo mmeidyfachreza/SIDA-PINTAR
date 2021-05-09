@@ -14,7 +14,7 @@ class Admin extends Authenticatable
     protected $dates = ['deleted_at'];
     protected $table = 'admins';
 
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'password', 'npsn', 'phone_number', 'photo'];
 
     protected $hidden = ['password',  'remember_token'];
 }

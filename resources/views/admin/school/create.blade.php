@@ -34,8 +34,8 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="nisn">NISN</label>
-                                <input type="text" class="form-control" id="nisn" name="nisn"
+                                <label for="nis">NIS</label>
+                                <input type="text" class="form-control" id="nis" name="nis"
                                     placeholder="Masukan NIS" required>
                             </div>
                             <div class="form-group">
@@ -82,7 +82,7 @@
                                 <label for="address">Alamat</label>
                                 <textarea class="form-control" id="address" name="address" id="address" cols="30" rows="2" required></textarea>
                             </div>
-
+                            
                             <div class="form-group">
                                 <label for="father_phone">Nomor HP Ayah</label>
                                 <input type="text" class="form-control" id="father_phone" name="father_phone"
@@ -154,26 +154,26 @@
                                 <label for="ijazah">Ijazah</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="ijazah" name="ijazah" required>
+                                        <input type="file" class="custom-file-input" id="ijazah" name="ijazah">
                                         <label class="custom-file-label" for="ijazah">Pilih file</label>
                                     </div>
                                 </div>
+                                <br>
                             </div>
                             <div class="form-group">
                                 <label for="ijazah_number">Nomor Ijazah</label>
                                 <input type="text" class="form-control" id="ijazah_number" name="ijazah_number"
-                                    placeholder="Masukan Nomor Ijazah" required>
+                                    placeholder="Masukan Nomor Ijazah">
                             </div>
-                            <div class="form-group">
-                                <label for="ijazah">Foto Siswa</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input class="custom-file-input" type="file" accept="image/*" name="photo" onchange="preview_image(event)" required>
-                                        <label class="custom-file-label" for="photo">Pilih file</label>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="form-col-form-label" for="Avatar">Foto Siswa</label>
+                                        <input class="form-control-file" type="file" accept="image/*" name="avatar" onchange="preview_image(event)">
+                                        <br>
+                                        <img style="width:100%" id="output_image"/>
                                     </div>
                                 </div>
-                                <br>
-                                <img style="width:30%" id="output_image"/>
                             </div>
                         </div>
                         <!-- /.card-body -->

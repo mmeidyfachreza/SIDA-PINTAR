@@ -17,23 +17,28 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{asset('assets/index2.html')}}"><b>SIDA</b> PINTAR</a>
+    <a href="#"><b>SIDA</b> PINTAR</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Login untuk akses sistem</p>
+        <div class="ribbon-wrapper">
+            <div class="ribbon bg-primary">
+              Admin
+            </div>
+          </div>
+      <p class="login-box-msg">Masuk untuk akses sistem</p>
 
       <form method="POST" action="{{ route('admin.login.post') }}">
         @csrf
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" value="{{ old('email') }}" name="email" required autocomplete="email" autofocus>
+          <input type="text" class="form-control" placeholder="Masukan NPSN" value="{{ old('npsn') }}" name="npsn" required autocomplete="npsn" autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
-          @error('email')
+          @error('npsn')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -53,12 +58,12 @@
                                 @enderror
         </div>
         <div class="row">
-          <div class="col-8">
-
+          <div class="col-6">
+            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
           </div>
           <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          <div class="col-6">
+            <a href="{{route('login')}}" class="btn btn-danger btn-block">Batal</a>
           </div>
           <!-- /.col -->
         </div>

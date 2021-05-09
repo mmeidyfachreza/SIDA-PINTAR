@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,8 +20,14 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', function () {
-    return redirect()->route('admin.login');
-});
+    return view('welcome');
+})->name('welcome');
+
+Route::get('/siswa', function () {
+    return view('student');
+})->name('student');
+
+Route::post('/siswa/pencarian', [GuestController::class,'search'])->name('search');
 
 Route::get('/tes', function () {
     return Storage::download("public/avatars/default.jpg");
@@ -35,7 +42,10 @@ Route::post('/admin/logout', [AdminLoginController::class,'logout'])->name('admi
 Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::get('/admin/home', [HomeController::class,'index'])->name('admin.home');
     Route::post('/admin/cari-siswa', [HomeController::class,'searchStudent'])->name('search.student');
-    Route::resource('siswa', StudentController::class);
+    Route::resource('siswa', StudentController::class)->except('show');
+    Route::get('/siswa/detail/{id}', [StudentController::class,'show'])->name('siswa.show');
+    Route::get('/siswa/sd', [StudentController::class,'indexSd'])->name('student.sd');
+    Route::get('/siswa/smp', [StudentController::class,'indexSmp'])->name('student.smp');
     Route::get('/admin/download-file/{type}/name/{name}', [HomeController::class,'downloadFile'])->name('admin.download');
     Route::get('surat-keterangan/{id}', [StudentController::class,'statementLetter'])->name('statement_letter');
 });

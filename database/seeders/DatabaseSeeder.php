@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Admin::create([
+            'npsn' => 34530535934,
             'name' => "Super Admin",
-            'email' => "admin@sida.com",
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ]);

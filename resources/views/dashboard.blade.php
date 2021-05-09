@@ -8,6 +8,61 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+        <div class="row">
+            @isset($sdCount)
+            <div class="col-lg-6 col-9">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3>{{$sdCount}}</h3>
+
+                    <p>Total Siswa SD</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-bag"></i>
+                  </div>
+                  <a href="{{route('student.sd')}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <!-- ./col -->
+            @endisset
+            @isset($smpCount)
+            <div class="col-lg-6 col-9">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                  <div class="inner">
+                    <h3>{{$smpCount}}</h3>
+
+                    <p>Total Siswa SMP</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <a href="{{route('student.smp')}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <!-- ./col -->
+            @endisset
+            @isset($studentCount)
+            <div class="col-lg-12 col-12">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                  <div class="inner">
+                    <h3>{{$studentCount}}</h3>
+
+                    <p>Total Siswa</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <a href="{{route('siswa.index')}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <!-- ./col -->
+            @endisset
+          </div>
+          <!-- /.row -->
             <section>
               <div class="card card-primary">
                   <div class="card-header">
@@ -35,8 +90,8 @@
                             </div>
                         @endif
                         <div class="form-group">
-                            <label for="nis">NIS</label>
-                            <input type="text" class="form-control" id="nis" name="nis" placeholder="masukan NIS" value="{{old('nis',$request->nis ?? "")}}" required>
+                            <label for="nisn">NISN</label>
+                            <input type="text" class="form-control" id="nisn" name="nisn" placeholder="masukan NISN" value="{{old('nisn',$request->nisn ?? "")}}" required>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -85,8 +140,8 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                           <tr>
-                                            <td>NIS</td>
-                                            <td>{{$student->nis}}</td>
+                                            <td>NISN</td>
+                                            <td>{{$student->nisn}}</td>
                                           </tr>
                                           <tr>
                                             <td>Nama</td>
@@ -116,7 +171,7 @@
                                             <td>Jenis Kelamin</td>
                                             <td>{{$student->gender}}</td>
                                           </tr>
-                                          {{-- 
+                                          {{--
                                           <tr>
                                             <td>Nomor HP Ayah</td>
                                             <td>{{$student->father_phone}}</td>
@@ -129,7 +184,7 @@
                                             <td>Nomor HP Ibu</td>
                                             <td>{{$student->mother_phone}}</td>
                                           </tr>
-                                          
+
                                           --}}
                                           <tr>
                                             <td>Nama Wali</td>
@@ -139,7 +194,7 @@
                                             <td>Nomor HP Wali</td>
                                             <td>{{$student->guardian_phone ?? "-"}}</td>
                                           </tr> --}}
-                                          <tr> 
+                                          <tr>
                                             <td>Asal Sekolah</td>
                                             <td>{{$student->school->name}}</td>
                                           </tr>
@@ -167,7 +222,7 @@
                                             @else
                                             <td>Data tidak ada</td>
                                             @endif
-                                            
+
                                           </tr>
                                         </tbody>
                                       </table>

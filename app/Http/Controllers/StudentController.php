@@ -18,11 +18,34 @@ class StudentController extends Controller
     public function index()
     {
         $page = "Siswa";
-        if (auth()->guard("admin")->check()) {
-            $students = Student::with('school')->paginate();
-        }else{
-            $students = Student::with('school')->where('school_id',auth()->guard('admin')->user()->school_id)->paginate();
-        }
+        $students = Student::with('school')->where('school_id',auth()->guard('web')->user()->school_id)->paginate();
+
+        return view('admin.student.index',compact('students','page'));
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexSd()
+    {
+        $page = "Siswa SD";
+        $students = Student::with('school')->whereHas('school',function($q){$q->where("level","sd");})->paginate();
+
+        return view('admin.student.index',compact('students','page'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexSmp()
+    {
+        $page = "Siswa SMP";
+        $students = Student::with('school')->whereHas('school',function($q){$q->where("level","smp");})->paginate();
 
         return view('admin.student.index',compact('students','page'));
     }
@@ -41,7 +64,7 @@ class StudentController extends Controller
         if (auth()->guard("admin")->check()) {
             $schools = School::all();
         }else{
-            $schools = School::find(auth()->guard("admin")->user()->school_id);
+            $schools = School::find(auth()->guard("web")->user()->school_id);
         }
 
         return view('admin.student.create',compact('page','genders','religions','levels','schools'));
@@ -64,6 +87,12 @@ class StudentController extends Controller
                 $ijazah = $request->ijazah->storeAs('ijazah',$name);
                 $student->save();
             }
+            if ($photo = $request->file('photo')) {
+                $name = $request->name.'-'.time().'.'.$photo->getClientOriginalExtension();
+                $student->photo = $name;
+                $photo = $request->photo->storeAs('public/photos',$name);
+                $student->save();
+            }
             DB::commit();
             // all good
         } catch (\Exception $e) {
@@ -82,7 +111,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $page = "Siswa";
+        $page = "Detail Siswa";
         $student = Student::find($id);
         return view('admin.student.show',compact('student','page'));
     }
@@ -102,7 +131,7 @@ class StudentController extends Controller
         if (auth()->guard("admin")->check()) {
             $schools = School::all();
         }else{
-            $schools = School::find(auth()->guard("admin")->user()->school_id);
+            $schools = School::find(auth()->guard("web")->user()->school_id);
         }
         $student = Student::find($id);
         return view('admin.student.edit',compact('student','page','genders','levels','religions','schools'));
@@ -127,6 +156,12 @@ class StudentController extends Controller
                 $student->ijazah = $name;
                 $request->ijazah->storeAs('ijazah',$name);
             }
+            if ($photo = $request->file('photo')) {
+                Storage::delete('photo/'.$student->photo);
+                $name = $request->name.'-'.time().'.'.$photo->getClientOriginalExtension();
+                $student->photo = $name;
+                $request->photo->storeAs('public/photos',$name);
+            }
             $student->nis = $request->nis;
             $student->name = $request->name;
             // $student->address = $request->address;
@@ -143,7 +178,7 @@ class StudentController extends Controller
             // $student->entry_year = $request->entry_year;
             $student->graduated_year = $request->graduated_year;
             $student->ijazah_number = $request->ijazah_number;
-            
+
             $student->update();
             DB::commit();
             // all good

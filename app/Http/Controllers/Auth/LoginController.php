@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -37,6 +39,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+    $this->validate($request, [
+        'npsn' => 'required|string', //VALIDASI KOLOM USERNAME
+        //TAPI KOLOM INI BISA BERISI EMAIL ATAU USERNAME
+        'password' => 'required|string|min:6',
+    ]);
+
+    //LAKUKAN LOGIN
+    if (Auth::attempt(['npsn' => $request->npsn, 'password' => $request->password])) {
+        //JIKA BERHASIL, MAKA REDIRECT KE HALAMAN HOME
+        return redirect()->route('admin.home');
+    }
+    //JIKA SALAH, MAKA KEMBALI KE LOGIN DAN TAMPILKAN NOTIFIKASI
+    throw ValidationException::withMessages([
+        'npsn' => ['NPSN/Password salah.'],
+    ]);
+
+    return redirect()->route('login')->with(['npsn' => 'Email/Password salah!']);
     }
 
     public function logout(Request $request)

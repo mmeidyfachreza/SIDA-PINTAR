@@ -15,7 +15,7 @@ class Student extends Model
         'birth_date' => 'date:Y-m-d'
     ];
     protected $fillable = [
-        'nis',
+        'nisn',
         'name',
         // 'address',
         'birth_place',
@@ -34,6 +34,7 @@ class Student extends Model
         'school_year',
         'ijazah',
         'ijazah_number',
+        'photo'
     ];
 
     public function setBirthDateAttribute($value)
@@ -44,7 +45,12 @@ class Student extends Model
     public function scopeDashboardSearch($querry,$request)
     {
         return $querry->where('school_id',$request['school_id'])
-        ->Where('nis','like','%'.$request['nis'].'%');
+        ->Where('nisn','like','%'.$request['nisn'].'%');
+    }
+
+    public function scopeGuestSearch($querry,$request)
+    {
+        return $querry->Where('nisn','like','%'.$request['nisn'].'%');
     }
 
     public function school()
