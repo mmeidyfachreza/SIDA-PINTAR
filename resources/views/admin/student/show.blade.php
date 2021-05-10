@@ -146,7 +146,7 @@
                             <div class="card-footer">
                             @if (auth()->guard('admin')->check())
                                 @if ($student->school->level=="sd")
-                                    <a href="{{route('srudent.sd')}}" class="btn btn-danger">Kembali</a>
+                                    <a href="{{route('student.sd')}}" class="btn btn-danger">Kembali</a>
                                 @elseif ($student->school->level=="smp")
                                     <a href="{{route('student.smp')}}" class="btn btn-danger">Kembali</a>
                                 @endif
