@@ -38,6 +38,7 @@ class AdminLoginController extends Controller
         'username' => 'required', //VALIDASI KOLOM USERNAME
         //TAPI KOLOM INI BISA BERISI EMAIL ATAU USERNAME
         'password' => 'required|string|min:6',
+        'captcha' => 'required|captcha'
     ]);
 
     //LAKUKAN LOGIN
@@ -51,6 +52,11 @@ class AdminLoginController extends Controller
     ]);
 
     return redirect()->route('admin.login')->with(['username' => 'Username/Password salah!']);
+    }
+
+    public function reloadCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
     }
 
     public function logout(Request $request)

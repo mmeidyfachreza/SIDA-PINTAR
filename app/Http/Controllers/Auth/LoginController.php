@@ -47,6 +47,7 @@ class LoginController extends Controller
         'npsn' => 'required|string', //VALIDASI KOLOM USERNAME
         //TAPI KOLOM INI BISA BERISI EMAIL ATAU USERNAME
         'password' => 'required|string|min:6',
+        'captcha' => 'required|captcha'
     ]);
 
     //LAKUKAN LOGIN
@@ -60,6 +61,11 @@ class LoginController extends Controller
     ]);
 
     return redirect()->route('login')->with(['npsn' => 'Email/Password salah!']);
+    }
+
+    public function reloadCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
     }
 
     public function logout(Request $request)

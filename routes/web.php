@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -38,12 +40,14 @@ Auth::routes();
 Route::get('/admin/login', [AdminLoginController::class,'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminLoginController::class,'login'])->name('admin.login.post');
 Route::post('/admin/logout', [AdminLoginController::class,'logout'])->name('admin.logout');
+Route::get('/admin/reload-captcha', [AdminLoginController::class, 'reloadCaptcha']);
+Route::get('/reload-captcha', [LoginController::class, 'reloadCaptcha']);
 //Admin Home page after login
 Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::get('/admin/home', [HomeController::class,'index'])->name('admin.home');
     Route::post('/admin/cari-siswa', [HomeController::class,'searchStudent'])->name('search.student');
-    Route::resource('siswa', StudentController::class)->except('show');
-    Route::get('/siswa/detail/{id}', [StudentController::class,'show'])->name('siswa.show');
+    Route::resource('siswa', StudentController::class);
+    Route::resource('akun-sekolah', UserController::class);
     Route::get('/siswa-sd', [StudentController::class,'indexSd'])->name('student.sd');
     Route::get('/siswa-smp', [StudentController::class,'indexSmp'])->name('student.smp');
     Route::get('/admin/download-file/{type}/name/{name}', [HomeController::class,'downloadFile'])->name('admin.download');

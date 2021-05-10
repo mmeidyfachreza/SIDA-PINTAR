@@ -88,7 +88,11 @@
       <span class="brand-text font-weight-light">SIDA PINTAR</span>
     </a>
 
-    @include('sidebar')
+    @if (auth()->guard("admin")->check())
+        @include('sidebar-admin')
+    @else
+        @include('sidebar')
+    @endif
   </aside>
 
   <!-- Content Wrapper. Contains page content -->

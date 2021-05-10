@@ -157,7 +157,6 @@ class StudentController extends Controller
     public function update(UpdateStudentRequest $request, $id)
     {
         $page = "Siswa";
-        dd("asdad");
         DB::beginTransaction();
         try {
             $student = Student::findOrFail($id);
