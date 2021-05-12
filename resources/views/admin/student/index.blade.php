@@ -1,4 +1,8 @@
 @extends('base')
+@section('plugin')
+    <!-- bs-custom-file-input -->
+    <script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+@endsection
 @section('content')
 <!-- Main content -->
 <section class="content">
@@ -26,7 +30,10 @@
                         <div style="float:left" class="card-title">List Data</div>
                         <div style="float:right">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{route('siswa.create')}}" class="btn btn-primary btn-sm">Tambah</a>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-sm">
+                                    Import Data Siswa
+                                </button>
+                                <a href="{{route('siswa.create')}}" class="btn btn-primary btn-sm">Tambah Data</a>
                             </div>
                         </div>
                     </div>
@@ -53,9 +60,9 @@
                                     <td>{{$student->nisn}}</td>
                                     <td>{{$student->school_year}}</td>
                                     <td>{{$student->father_name}}</td>
-                                    <td>{{$student->school->name}}</td>
+                                    <td>{{$student->school->name ?? ""}}</td>
                                     <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
                                             <a class="btn btn-info" href="{{route('siswa.show',$student->id)}}"><i class="fa fa-eye"></i></a>
                                             <a class="btn btn-warning" href="{{route('siswa.edit',$student->id)}}"><i
                                                     class="fa fa-pen"></i></a>
@@ -81,7 +88,57 @@
             <!--/.col (left) -->
         </div>
         <!-- /.row -->
+        <div class="modal fade" id="modal-sm">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Import Data Siswa</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="{{route('student.import')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                <div class="modal-body">
+                    <p>Pastikan mengikuti format excel yang telah disediakan sebelum melakukan import data</p>
+                    <p><a href="{{route('student.format.export')}}" class="btn btn-success btn-sm">Download Format Excel</a></p>
+
+                        <div class="form-group">
+                            <label for="studentImport">Upload File Excel</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="studentImport" name="studentImport" required>
+                                    <label class="custom-file-label" for="studentImport">Pilih file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="page" value="{{$page}}">
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Proses</button>
+                </div>
+              </div>
+            </form>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- /.modal -->
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
+@endsection
+
+@section('javascript')
+<!-- bs-custom-file-input -->
+<script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        bsCustomFileInput.init();
+
+    });
+  </script>
 @endsection

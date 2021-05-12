@@ -42,7 +42,6 @@ class DatabaseSeeder extends Seeder
                 'level' => $school[1],
             ]);
         }
-        \App\Models\School::factory(10)->create();
         // \App\Models\Student::factory(10)->create();
         \App\Models\User::factory(10)->create();
     }

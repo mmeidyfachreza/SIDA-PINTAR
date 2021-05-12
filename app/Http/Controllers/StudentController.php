@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StudentImportFormat;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Imports\StudentsImport;
 use App\Models\School;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -237,5 +240,34 @@ class StudentController extends Controller
     {
         $student = Student::with('school')->find($id);
         return view('letter.statement_letter',compact('student'));
+    }
+
+    public function studentImport(Request $request)
+    {
+        if (auth()->guard('admin')->check()) {
+            Excel::import(new StudentsImport(), $request->file('studentImport'));
+        } else {
+            Excel::import(new StudentsImport(auth()->guard('web')->user()->school_id), $request->file('studentImport'));
+        }
+
+
+
+        if ($request->page=="Siswa SD") {
+            return redirect()->route('student.sd')->with('success','Berhasil import data');
+        }elseif($request->page=="Siswa SMP"){
+            return redirect()->route('student.smp')->with('success','Berhasil import data');
+        }else{
+            return redirect()->route('siswa.index')->with('success','Berhasil import data');
+        }
+    }
+
+    public function studentExportFormat()
+    {
+        if (auth()->guard('admin')->check()) {
+            return Excel::download(new StudentImportFormat(), 'Format Import Data Siswa.xlsx');
+        }else{
+            return Excel::download(new StudentImportFormat(auth()->guard('web')->user()->school_id), 'Format Import Data Siswa '.auth()->guard('web')->user()->school->name.'.xlsx');
+        }
+
     }
 }
