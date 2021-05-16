@@ -8,7 +8,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +32,7 @@ Route::get('guest/siswa', function () {
 Route::post('guest/siswa/pencarian', [GuestController::class,'search'])->name('search');
 
 Route::get('/tes', function () {
-    return Storage::download("public/avatars/default.jpg");
+    Artisan::call('migrate:fresh --seed');
 });
 
 Auth::routes();
