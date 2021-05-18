@@ -175,7 +175,7 @@ class StudentController extends Controller
                 $student->photo = $name;
                 $request->photo->storeAs('public/photos',$name);
             }
-            $student->nis = $request->nis;
+            $student->nisn = $request->nisn;
             $student->name = $request->name;
             // $student->address = $request->address;
             $student->birth_place = $request->birth_place;
@@ -197,12 +197,10 @@ class StudentController extends Controller
             // all good
         } catch (\Exception $e) {
             DB::rollback();
-            dd("asdad");
-            return redirect()->route('siswa.edit',$id)->withErrors(['message'=>$e->getMessage]);
+            return redirect()->route('siswa.edit',$id)->withErrors(['message'=>$e->getMessage()]);
         }
 
         if (auth()->guard('admin')->check()) {
-            dd("ini admin");
             if (School::where("id",$request->school_id)->where("level","sd")) {
                 return redirect()->route('student.sd')->with('success','Berhasil merubah data');
             }elseif(School::where("id",$request->school_id)->where("level","smp")){

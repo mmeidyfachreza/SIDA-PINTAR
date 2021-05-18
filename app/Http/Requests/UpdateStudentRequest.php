@@ -13,7 +13,7 @@ class UpdateStudentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class UpdateStudentRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'nisn'=> 'required|unique:students,nisn',
+            'nisn'=> 'required|unique:students,nisn,'.$this->siswa,
             'birth_place' => 'required',
             'birth_date' => 'required|date_format:d/m/Y',
             'religion' => 'required',

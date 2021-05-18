@@ -28,7 +28,7 @@
 
         <li class="nav-item">
             <a href="{{route('student.sd')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 Siswa SD
               </p>
@@ -36,7 +36,7 @@
           </li>
           <li class="nav-item">
             <a href="{{route('student.smp')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 Siswa SMP
               </p>
@@ -44,9 +44,17 @@
           </li>
           <li class="nav-item">
             <a href="{{route('akun-sekolah.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Akun Sekolah
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('sekolah.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-school"></i>
+              <p>
+                Sekolah
               </p>
             </a>
           </li>

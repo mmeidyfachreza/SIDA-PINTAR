@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,7 @@ Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::post('/admin/cari-siswa', [HomeController::class,'searchStudent'])->name('search.student');
     Route::resource('siswa', StudentController::class);
     Route::resource('akun-sekolah', UserController::class);
+    Route::resource('sekolah', SchoolController::class);
     Route::post('siswa-import', [StudentController::class,'studentImport'])->name('student.import');
     Route::get('format-export-siswa', [StudentController::class,'studentExportFormat'])->name('student.format.export');
     Route::get('/siswa-sd', [StudentController::class,'indexSd'])->name('student.sd');

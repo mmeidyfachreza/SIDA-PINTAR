@@ -26,7 +26,7 @@
                         <div style="float:left" class="card-title">List Data</div>
                         <div style="float:right">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{route('siswa.create')}}" class="btn btn-primary btn-sm">Tambah</a>
+                                <a href="{{route('sekolah.create')}}" class="btn btn-primary btn-sm">Tambah</a>
                             </div>
                         </div>
                     </div>
@@ -37,35 +37,31 @@
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Nama</th>
-                            <th>NIS</th>
-                            <th>Tahun Pelajaran</th>
-                            <th>Nama Orang Tua</th>
-                            <th>Asal Sekolah</th>
+                            <th>Tingkat</th>
+                            <th>Kepala Sekolah</th>
+                            <th>NIP</th>
                             <th>Aksi</th>
                           </tr>
                         </thead>
                         <tbody>
                             <?php $x=1?>
-                            @foreach ($students as $student)
+                            @foreach ($schools as $school)
                                 <tr>
                                     <td>{{$x++}}</td>
-                                    <td>{{$student->name}}</td>
-                                    <td>{{$student->nis}}</td>
-                                    <td>{{$student->school_year}}</td>
-                                    <td>{{$student->father_name}}</td>
-                                    <td>{{$student->school->name}}</td>
+                                    <td>{{$school->name}}</td>
+                                    <td>{{$school->level}}</td>
+                                    <td>{{$school->headmaster}}</td>
+                                    <td>{{$school->nip}}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a class="btn btn-info" href="{{route('siswa.show',$student->id)}}"><i class="fa fa-eye"></i></a>
-                                            <a class="btn btn-warning" href="{{route('siswa.edit',$student->id)}}"><i
+                                            <a class="btn btn-warning" href="{{route('sekolah.edit',$school->id)}}"><i
                                                     class="fa fa-pen"></i></a>
-                                            <form action="{{route('siswa.destroy',$student->id)}}" method="POST">
+                                            <form action="{{route('sekolah.destroy',$school->id)}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger delete-data" type="submit"><i
                                                         class="fa fa-trash"></i></button>
                                             </form>
-                                            <a class="btn btn-info" href="{{route('statement_letter',$student->id)}}" target="_blank"><i class="fa fa-file"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -74,7 +70,7 @@
                       </table>
                     </div>
                     <!-- /.card-body -->
-                    {{$students->links('pagination::bootstrap-4')}}
+                    {{$schools->links('pagination::bootstrap-4')}}
                   </div>
                 <!-- /.card -->
             </div>
