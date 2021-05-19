@@ -37,7 +37,6 @@ class CreateStudentsTable extends Migration
             $table->string('ijazah')->nullable();
             $table->string('ijazah_number')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

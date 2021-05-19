@@ -48,7 +48,7 @@ class StudentsImport implements ToModel, WithHeadingRow, WithValidation
             'nisn'=> 'required|unique:students,nisn',
             'nama' => 'required|string',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required|date_format:Y-m-d',
+            'tanggal_lahir' => 'required|date_format:d/m/Y',
             'agama' => 'required',
             'jk' => Rule::in($gender),
             'nama_orang_tua'=> 'required',

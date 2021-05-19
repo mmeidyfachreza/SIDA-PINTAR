@@ -44,7 +44,7 @@
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Nama</th>
-                            <th>NIS</th>
+                            <th>NISN</th>
                             <th>Tahun Pelajaran</th>
                             <th>Nama Orang Tua</th>
                             <th>Asal Sekolah</th>
