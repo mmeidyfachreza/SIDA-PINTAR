@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{asset('assets/dist/css/adminlte.min.css')}}">
     <style>
         body{
-            font-size: 30px;
+            font-size: 10px;
         }
     </style>
 </head>

@@ -6,8 +6,10 @@ use App\Exports\StudentImportFormat;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Imports\StudentsImport;
+use App\Imports\StudentsUpdateImport;
 use App\Models\School;
 use App\Models\Student;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -179,7 +181,7 @@ class StudentController extends Controller
             $student->name = $request->name;
             // $student->address = $request->address;
             $student->birth_place = $request->birth_place;
-            $student->birth_date = $request->birth_date;
+            $student->birth_date = \Carbon\Carbon::createFromFormat('d/m/Y', $request->birth_date)->format('d-m-Y');
             $student->religion = $request->religion;
             $student->gender = $request->gender;
             $student->father_name = $request->father_name;
@@ -237,15 +239,35 @@ class StudentController extends Controller
     public function statementLetter($id)
     {
         $student = Student::with('school')->find($id);
-        return view('letter.statement_letter',compact('student'));
+        // return view('letter.statement_letter',compact('student'));
+        $pdf = PDF::loadView('letter.statement_letter', compact('student'));
+        return $pdf->download('invoice.pdf');
     }
 
     public function studentImport(Request $request)
     {
+
         if (auth()->guard('admin')->check()) {
             Excel::import(new StudentsImport(), $request->file('studentImport'));
         } else {
             Excel::import(new StudentsImport(auth()->guard('web')->user()->school_id), $request->file('studentImport'));
+        }
+
+        if ($request->page=="Siswa SD") {
+            return redirect()->route('student.sd')->with('success','Berhasil import data');
+        }elseif($request->page=="Siswa SMP"){
+            return redirect()->route('student.smp')->with('success','Berhasil import data');
+        }else{
+            return redirect()->route('siswa.index')->with('success','Berhasil import data');
+        }
+    }
+
+    public function studentUpdateImport(Request $request)
+    {
+        if (auth()->guard('admin')->check()) {
+            Excel::import(new StudentsUpdateImport(), $request->file('studentUpdateImport'));
+        } else {
+            Excel::import(new StudentsUpdateImport(auth()->guard('web')->user()->school_id), $request->file('studentUpdateImport'));
         }
 
 

@@ -33,6 +33,7 @@ class StudentSheetFormat implements WithTitle, WithHeadings
                 'Id_Sekolah',
                 'Tahun_Lulus',
                 'Tahun_Ajaran',
+                'Nomor_Ijazah',
             ];
         }else {
             return [
@@ -46,6 +47,7 @@ class StudentSheetFormat implements WithTitle, WithHeadings
                 'Nama_Wali',
                 'Tahun_Lulus',
                 'Tahun_Ajaran',
+                'Nomor_Ijazah',
             ];
         }
 

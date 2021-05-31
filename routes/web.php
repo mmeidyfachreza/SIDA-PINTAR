@@ -33,7 +33,8 @@ Route::get('guest/siswa', function () {
 Route::post('guest/siswa/pencarian', [GuestController::class,'search'])->name('search');
 
 Route::get('/tes', function () {
-    Artisan::call('migrate:fresh --seed');
+    //Artisan::call('migrate:fresh --seed');
+    return view("letter.statement_letter2");
 });
 
 Auth::routes();
@@ -51,6 +52,7 @@ Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::resource('akun-sekolah', UserController::class);
     Route::resource('sekolah', SchoolController::class);
     Route::post('siswa-import', [StudentController::class,'studentImport'])->name('student.import');
+    Route::post('siswa-update-import', [StudentController::class,'studentUpdateImport'])->name('student.import.update');
     Route::get('format-export-siswa', [StudentController::class,'studentExportFormat'])->name('student.format.export');
     Route::get('/siswa-sd', [StudentController::class,'indexSd'])->name('student.sd');
     Route::get('/siswa-smp', [StudentController::class,'indexSmp'])->name('student.smp');
