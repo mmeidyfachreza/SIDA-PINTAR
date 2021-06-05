@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'characters' => ['2', '3', '4', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'm', 'n', 'p', 'q', 'r', 't', 'u', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'X', 'Y', 'Z'],
+    'characters' => ['2', '3', '4', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'm', 'n', 'p', 'q', 'r', 't', 'u', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'X', 'Y', 'Z'],
     'default' => [
-        'length' => 4,
-        'width' => 200,
-        'height' => 50,
-        'quality' => 100,
+        'length' => 9,
+        'width' => 120,
+        'height' => 36,
+        'quality' => 90,
         'math' => false,
         'expire' => 60,
         'encrypt' => false,
@@ -15,16 +15,16 @@ return [
         'length' => 9,
         'width' => 120,
         'height' => 36,
-        'quality' => 200,
+        'quality' => 20,
         'math' => true,
     ],
 
     'flat' => [
-        'length' => 6,
+        'length' => 4,
         'width' => 160,
-        'height' => 46,
+        'height' => 60,
         'quality' => 90,
-        'lines' => 6,
+        'lines' => 3,
         'bgImage' => false,
         'bgColor' => '#ecf2f4',
         'fontColors' => ['#2c3e50', '#c0392b', '#16a085', '#c0392b', '#8e44ad', '#303f9f', '#f57c00', '#795548'],

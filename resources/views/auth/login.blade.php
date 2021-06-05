@@ -56,7 +56,7 @@
               </div>
               <div class="form-group mt-4 mb-4">
                 <div class="captcha">
-                    <span><img src="{{captcha_src()}}" alt=""></span>
+                    <span>{!!captcha_img("flat")!!}</span>
                     <button type="button" class="btn btn-danger" class="reload" id="reload">
                         &#x21bb;
                     </button>
@@ -64,7 +64,7 @@
               </div>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control @error('captcha') is-invalid @enderror" placeholder="Masukan captcha"
-                        value="{{ old('captcha') }}" name="captcha" required autocomplete="captcha" autofocus>
+                         name="captcha" required autocomplete="captcha" autofocus>
                     <div class="input-group-append">
                         <div class="input-group-text">
 
