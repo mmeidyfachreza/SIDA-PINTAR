@@ -9,7 +9,6 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
-use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
@@ -53,14 +52,13 @@ class StudentsImport implements ToModel, WithHeadingRow, WithValidation, SkipsOn
 
     public function rules(): array
     {
-
         $schoolId = School::select("id")->get()->pluck("id")->toArray();
         $gender = array('L','P');
         return [
             'nisn'=> 'required|unique:students,nisn',
             'nama' => 'required|string',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
+            'tanggal_lahir' => 'required|integer',
             'agama' => 'required',
             'jk' => Rule::in($gender),
             'nama_orang_tua'=> 'required',
@@ -87,7 +85,7 @@ class StudentsImport implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             'nomor_ijazah.required' => 'Nomor ijazah wajib diisi',
 
             'nisn.unique' => 'NISN sudah terdaftar, silahkan gunakan NISN lain',
-            'tanggal_lahir.date_format' => 'Format tanggal lahir salah',
+            'tanggal_lahir.integer' => 'Format tanggal lahir salah dan pastikan tidak ada tanda petik seperti \'02/12/2021',
             'tahun_lulus.date_format' => 'Format tahun lulus salah',
 
             // 'date_format' => ':attribute tidak boleh menggunakan angka',
