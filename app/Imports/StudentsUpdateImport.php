@@ -52,7 +52,7 @@ class StudentsUpdateImport implements ToCollection, WithHeadingRow, WithValidati
             'nisn'=> 'required',
             'nama' => 'required|string',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
+            'tanggal_lahir' => 'required|integer',
             'agama' => 'required',
             'jk' => Rule::in($gender),
             'nama_orang_tua'=> 'required',
@@ -78,7 +78,7 @@ class StudentsUpdateImport implements ToCollection, WithHeadingRow, WithValidati
             'tahun_ajaran.required' => 'Tahun ajaran wajib diisi',
             'nomor_ijazah.required' => 'Nomor ijazah wajib diisi',
 
-            'tanggal_lahir.date_format' => 'Format tanggal lahir salah',
+            'tanggal_lahir.integer' => 'Format tanggal lahir salah dan pastikan tidak ada tanda petik seperti \'02/12/2021',
             'tahun_lulus.date_format' => 'Format tahun lulus salah',
 
             // 'date_format' => ':attribute tidak boleh menggunakan angka',
