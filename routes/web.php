@@ -9,7 +9,6 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,8 +46,9 @@ Route::get('/reload-captcha', [LoginController::class, 'reloadCaptcha']);
 //Admin Home page after login
 Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::get('/admin/home', [HomeController::class,'index'])->name('admin.home');
-    Route::post('/admin/cari-siswa', [HomeController::class,'searchStudent'])->name('search.student');
+    Route::post('/admin/cari-siswa', [HomeController::class,'searchStudent'])->name('dashboard.search');
     Route::resource('siswa', StudentController::class);
+    Route::post('/siswa/cari', [StudentController::class,'searchStudent'])->name('search.student');
     Route::resource('akun-sekolah', UserController::class);
     Route::resource('sekolah', SchoolController::class);
     Route::post('siswa-import', [StudentController::class,'studentImport'])->name('student.import');

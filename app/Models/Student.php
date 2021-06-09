@@ -43,7 +43,20 @@ class Student extends Model
     public function scopeDashboardSearch($querry,$request)
     {
         return $querry->where('school_id',$request['school_id'])
-        ->Where('nisn','like','%'.$request['nisn'].'%');
+        ->where('nisn','like','%'.$request['nisn'].'%');
+    }
+
+    public function scopeSearch($querry,$value,$school = Null)
+    {
+        if ($school) {
+            return $querry->where('nisn','like','%'.$value.'%')
+            ->orWhere('name','like','%'.$value.'%')
+            ->where('school_id',$school);
+        }else {
+            return $querry->where('nisn','like','%'.$value.'%')
+            ->orWhere('name','like','%'.$value.'%');
+        }
+
     }
 
     public function scopeGuestSearch($querry,$request)

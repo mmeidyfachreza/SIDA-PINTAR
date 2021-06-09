@@ -21,6 +21,37 @@
             <p>{{ $message }}</p>
         </div>
         @endif
+        <div id="accordion">
+            <div class="card card-primary">
+                <div class="card-header">
+                  <h4 class="card-title w-100">
+                    <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
+                        <span><i class="nav-icon fas fa-search"></i></span>&nbsp;&nbsp;Pencarian
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="collapse @isset($request) show @endisset" data-parent="#accordion">
+                    <form action="{{route('search.student')}}" method="POST">
+                        @csrf
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="value">NISN/Nama Siswa</label>
+                                <input type="text" class="form-control" id="value" name="value" placeholder="masukan NISN/Nama Siswa" value="{{old('nisn',$request->value ?? "")}}" required>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                          <button type="submit" class="btn btn-primary">Cari</button>
+                          @isset($request)
+                          <a href="{{route('siswa.index')}}" class="btn btn-danger">Batalkan</a>
+                          @endisset
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+
+
         <div class="row">
             <!-- left column -->
             <div class="col-md-12">

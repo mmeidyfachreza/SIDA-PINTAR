@@ -70,7 +70,7 @@
                   </div>
                   <!-- /.card-header -->
                   <!-- form start -->
-                  <form action="{{route('search.student')}}" method="POST">
+                  <form action="{{route('dashboard.search')}}" method="POST">
                     @csrf
                     <div class="card-body">
                         @if (auth()->guard("admin")->check())
