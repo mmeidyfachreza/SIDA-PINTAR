@@ -270,8 +270,6 @@ class StudentController extends Controller
             Excel::import(new StudentsUpdateImport(auth()->guard('web')->user()->school_id), $request->file('studentUpdateImport'));
         }
 
-
-
         if ($request->page=="Siswa SD") {
             return redirect()->route('student.sd')->with('success','Berhasil import data');
         }elseif($request->page=="Siswa SMP"){
