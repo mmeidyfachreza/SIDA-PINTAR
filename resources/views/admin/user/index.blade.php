@@ -45,9 +45,9 @@
                         </thead>
                         <tbody>
                             <?php $x=1?>
-                            @foreach ($users as $user)
+                            @foreach ($users as $key => $user)
                                 <tr>
-                                    <td>{{$x++}}</td>
+                                    <td>{{$users->firstItem() + $key}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->npsn}}</td>
                                     <td>{{$user->phone_number}}</td>

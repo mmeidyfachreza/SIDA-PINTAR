@@ -45,9 +45,9 @@
                         </thead>
                         <tbody>
                             <?php $x=1?>
-                            @foreach ($schools as $school)
+                            @foreach ($schools as $key => $school)
                                 <tr>
-                                    <td>{{$x++}}</td>
+                                    <td>{{$schools->firstItem() + $key}}</td>
                                     <td>{{$school->name}}</td>
                                     <td>{{$school->level}}</td>
                                     <td>{{$school->headmaster}}</td>

@@ -89,9 +89,9 @@
                             </thead>
                             <tbody>
                                 <?php $x=1?>
-                                @foreach ($students as $student)
+                                @foreach ($students as $key => $student)
                                 <tr>
-                                    <td>{{$x++}}</td>
+                                    <td>{{$students->firstItem() + $key}}</td>
                                     <td>{{$student->name}}</td>
                                     <td>{{$student->nisn}}</td>
                                     <td>{{$student->school_year}}</td>
