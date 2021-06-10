@@ -70,7 +70,7 @@
                       </table>
                     </div>
                     <!-- /.card-body -->
-                    {{$schools->links('pagination::bootstrap-4')}}
+                    {{$schools->setPath(url()->current())->links('pagination::bootstrap-4')}}
                   </div>
                 <!-- /.card -->
             </div>

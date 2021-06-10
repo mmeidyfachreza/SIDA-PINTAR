@@ -71,7 +71,7 @@
                       </table>
                     </div>
                     <!-- /.card-body -->
-                    {{$users->links('pagination::bootstrap-4')}}
+                    {{$users->setPath(url()->current())->links('pagination::bootstrap-4')}}
                   </div>
                 <!-- /.card -->
             </div>

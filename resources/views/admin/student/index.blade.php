@@ -119,7 +119,7 @@
                         </table>
                     </div>
                     <!-- /.card-body -->
-                    {{$students->links('pagination::bootstrap-4')}}
+                    {{$students->setPath(url()->current())->links('pagination::bootstrap-4')}}
                 </div>
                 <!-- /.card -->
             </div>
