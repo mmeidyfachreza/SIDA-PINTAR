@@ -120,6 +120,7 @@ class UserController extends Controller
             }
             $user->npsn = $request->npsn;
             $user->name = $request->name;
+            $user->school_id = $request->school_id;
             $user->phone_number = $request->phone_number;
             if ($request->password) {
                 $user->password = Hash::make($request->password);
