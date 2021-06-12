@@ -39,11 +39,22 @@
                                 <input type="text" class="form-control" id="value" name="value" placeholder="masukan NISN/Nama Siswa" value="{{old('nisn',$request->value ?? "")}}" required>
                             </div>
                         </div>
+                        @if ($page=="Siswa SD")
+                            <input type="hidden" name="level" value="sd">
+                        @elseif ($page=="Siswa SMP")
+                            <input type="hidden" name="level" value="smp">
+                        @endif
                         <!-- /.card-body -->
                         <div class="card-footer">
                           <button type="submit" class="btn btn-primary">Cari</button>
                           @isset($request)
+                            @if ($page=="Siswa SD")
+                                <a href="{{route('student.sd')}}" class="btn btn-danger">Batalkan</a>
+                            @elseif ($page=="Siswa SMP")
+                                <a href="{{route('student.smp')}}" class="btn btn-danger">Batalkan</a>
+                            @else
                           <a href="{{route('siswa.index')}}" class="btn btn-danger">Batalkan</a>
+                            @endif
                           @endisset
                         </div>
                       </form>

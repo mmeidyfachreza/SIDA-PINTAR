@@ -291,14 +291,14 @@ class StudentController extends Controller
 
     public function searchStudent(Request $request)
     {
-        $page = 'Siswa';
         if (auth()->guard("admin")->check()) {
-            $school = School::all();
+            $page = 'Siswa '.strtoupper($request->level);
+            $students = Student::with('school')->search($request->value)->whereHas("school",function($q) use ($request){$q->where("level",$request->level);})->paginate();
         }else{
+            $page = 'Siswa';
             $school = School::find(auth()->guard("web")->user()->school_id);
+            $students = Student::with('school')->search($request->value,$school->id)->paginate();
         }
-        $students = Student::with('school')->search($request->value,$school->id)->paginate();
-
         return view('admin.student.index',compact('page','students','request'));
     }
 }
