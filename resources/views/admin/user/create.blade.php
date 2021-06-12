@@ -7,6 +7,8 @@
     <script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 @endsection
 @section('content')
+<!-- Content Header (Page header) -->
+<x-page-header :name="$page"/>
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">

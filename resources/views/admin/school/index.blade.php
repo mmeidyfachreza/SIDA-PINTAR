@@ -1,5 +1,7 @@
 @extends('base')
 @section('content')
+<!-- Content Header (Page header) -->
+<x-page-header :name="$page"/>
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
