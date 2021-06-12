@@ -4,6 +4,8 @@
     <script src="{{asset('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 @endsection
 @section('content')
+<!-- Content Header (Page header) -->
+<x-page-header :name="$page"/>
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
@@ -47,13 +49,13 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                           <button type="submit" class="btn btn-primary">Cari</button>
-                          @isset($request)
+                            @isset($request)
                             @if ($page=="Siswa SD")
                                 <a href="{{route('student.sd')}}" class="btn btn-danger">Batalkan</a>
                             @elseif ($page=="Siswa SMP")
                                 <a href="{{route('student.smp')}}" class="btn btn-danger">Batalkan</a>
                             @else
-                          <a href="{{route('siswa.index')}}" class="btn btn-danger">Batalkan</a>
+                                <a href="{{route('siswa.index')}}" class="btn btn-danger">Batalkan</a>
                             @endif
                           @endisset
                         </div>
