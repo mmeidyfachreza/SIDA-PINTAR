@@ -15,10 +15,10 @@ class HomeController extends Controller
         $page = 'Dashboard';
 
         if (auth()->guard("admin")->check()) {
-            $schools = School::all();
+            $schools = School::withCount("students")->paginate(5);
             $sdCount = Student::whereHas('school',function($q){$q->where("level","sd");})->count();
             $smpCount = Student::whereHas('school',function($q){$q->where("level","smp");})->count();
-            
+
             return view('dashboard',compact('page','schools','sdCount','smpCount'));
         }else{
             $schools = School::find(auth()->guard("web")->user()->school_id);

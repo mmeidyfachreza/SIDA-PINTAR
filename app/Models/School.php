@@ -11,8 +11,8 @@ class School extends Model
 
     protected $fillable = ['name','level','headmaster','nip','letterhead'];
 
-    // public function student()
-    // {
-    //     return $this->hasOne(Student::class);
-    // }
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }
