@@ -18,6 +18,7 @@ class HomeController extends Controller
             $schools = School::all();
             $sdCount = Student::whereHas('school',function($q){$q->where("level","sd");})->count();
             $smpCount = Student::whereHas('school',function($q){$q->where("level","smp");})->count();
+            
             return view('dashboard',compact('page','schools','sdCount','smpCount'));
         }else{
             $schools = School::find(auth()->guard("web")->user()->school_id);
