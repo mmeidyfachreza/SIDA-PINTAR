@@ -38,7 +38,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="value">NISN/Nama Siswa</label>
-                                <input type="text" class="form-control" id="value" name="value" placeholder="masukan NISN/Nama Siswa" value="{{old('nisn',$request->value ?? "")}}" required>
+                                <input type="text" class="form-control" id="value" name="name" placeholder="masukan NISN/Nama Siswa" value="{{old('nisn',$request->value ?? "")}}" required>
                             </div>
                         </div>
                         @if ($page=="Siswa SD")
