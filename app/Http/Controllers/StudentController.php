@@ -293,7 +293,7 @@ class StudentController extends Controller
     {
         if (auth()->guard("admin")->check()) {
             $page = 'Siswa '.strtoupper($request->level);
-            $students = Student::with('school')->search($request->value)->whereHas("school",function($q) use ($request){$q->where("level",$request->level);})->paginate();
+            $students = Student::with('school')->filterBy($request->all())->whereHas("school",function($q) use ($request){$q->where("level",$request->level);})->paginate();
         }else{
             $page = 'Siswa';
             $school = School::find(auth()->guard("web")->user()->school_id);

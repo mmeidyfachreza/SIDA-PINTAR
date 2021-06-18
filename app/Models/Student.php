@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Utilities\FilterBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -57,6 +58,13 @@ class Student extends Model
             ->orWhere('name','like','%'.$value.'%');
         }
 
+    }
+
+    public function scopeFilterBy($query, $filters)
+    {
+        $namespace = 'App\Utilities\StudentFilters';
+        $filter = new FilterBuilder($query, $filters, $namespace);
+        return $filter->apply();
     }
 
     public function scopeGuestSearch($querry,$request)
