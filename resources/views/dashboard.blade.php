@@ -68,51 +68,55 @@
             @endisset
         </div>
         <!-- /.row -->
-        <!-- TABLE: LATEST ORDERS -->
+        @if (auth()->guard("admin")->check())
+        <!-- TABLE RINCIAN SISWA -->
         <div class="card">
             <div class="card-header border-transparent">
-              <h3 class="card-title">Total Siswa Antar Sekolah</h3>
+                <h3 class="card-title">Rincian Siswa per sekolah</h3>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-              <div class="table-responsive">
-                <table class="table m-0">
-                  <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama Sekolah</th>
-                    <th>Total Siswa</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($schools as $key => $school)
-                    <tr>
-                        <td>{{$schools->firstItem() + $key}}</td>
-                        <td>{{$school->name}}</td>
-                        <td>{{$school->students_count}}</td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.table-responsive -->
+                <div class="table-responsive">
+                    <table class="table m-0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Sekolah</th>
+                                <th class="text-center">Siswa</th>
+                                <th class="text-center">Belum Upload Ijazah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($schools as $key => $school)
+                            <tr>
+                                <td>{{$schools->firstItem() + $key}}</td>
+                                <td>{{$school->name}}</td>
+                                <td class="text-center">{{$school->students_count}}</td>
+                                <td class="text-center">{{$school->without_ijazah}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
                 {{$schools->setPath(url()->current())->links('pagination::bootstrap-4')}}
             </div>
             <!-- /.card-footer -->
-          </div>
-          <!-- /.card -->
+        </div>
+        <!-- /.card -->
+        @endif
         <section>
             <div class="card card-primary">
                 <div class="card-header">

@@ -15,7 +15,7 @@ class HomeController extends Controller
         $page = 'Dashboard';
 
         if (auth()->guard("admin")->check()) {
-            $schools = School::withCount("students")->paginate(5);
+            $schools = School::withCount(['students','students as without_ijazah'=>function($q){$q->whereNull('ijazah');}])->paginate(5);
             $sdCount = Student::whereHas('school',function($q){$q->where("level","sd");})->count();
             $smpCount = Student::whereHas('school',function($q){$q->where("level","smp");})->count();
 
