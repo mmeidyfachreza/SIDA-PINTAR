@@ -10,13 +10,12 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\SkipsErrors;
-use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 
-class StudentsImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnError
+class StudentsImport implements ToModel, WithHeadingRow, WithValidation, SkipsEmptyRows
 {
 
-    use Importable,SkipsErrors;
+    use Importable;
 
     protected $schoolId;
 
@@ -37,7 +36,7 @@ class StudentsImport implements ToModel, WithHeadingRow, WithValidation, SkipsOn
                 'nisn' => $row["nisn"],
                 'name' => $row["nama"],
                 'birth_place' => $row["tempat_lahir"],
-                'birth_date' => Date::excelToDateTimeObject($row["tanggal_lahir"])->format("Y-m-d"),
+                'birth_date' => Date::excelToDateTimeObject($row["tanggal_lahir"])->format("Y-m-d") ,
                 'religion' => $row["agama"],
                 'gender' => $row["jk"],
                 'father_name' => $row["nama_orang_tua"],

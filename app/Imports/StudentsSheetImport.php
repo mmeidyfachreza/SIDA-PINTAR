@@ -27,7 +27,6 @@ class StudentsSheetImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        //dd(Carbon::instance(Date::excelToDateTimeObject($row["tanggal_lahir"])));
         return new Student([
             'nisn' => $row["nisn"],
             'name' => $row["nama"],
@@ -43,43 +42,43 @@ class StudentsSheetImport implements ToModel, WithHeadingRow
         ]);
     }
 
-    // public function rules(): array
-    // {
-    //     $schoolId = School::select("id")->get()->pluck("id")->toArray();
-    //     $gender = array('L','P');
-    //     return [
-    //         'nisn'=> 'required|unique:students,nisn',
-    //         'nama' => 'required|string',
-    //         'tempat_lahir' => 'required',
-    //         'tanggal_lahir' => 'required',
-    //         'agama' => 'required',
-    //         'jk' => Rule::in($gender),
-    //         'nama_orang_tua'=> 'required',
-    //         'id_sekolah'=> Rule::in($schoolId),
-    //         'tahun_lulus' => 'required|date_format:Y',
-    //         'tahun_ajaran' => 'required',
-    //     ];
-    // }
+    public function rules(): array
+    {
+        $schoolId = School::select("id")->get()->pluck("id")->toArray();
+        $gender = array('L','P');
+        return [
+            'nisn'=> 'required|unique:students,nisn',
+            'nama' => 'required|string',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'agama' => 'required',
+            'jk' => Rule::in($gender),
+            'nama_orang_tua'=> 'required',
+            'id_sekolah'=> Rule::in($schoolId),
+            'tahun_lulus' => 'required|date_format:Y',
+            'tahun_ajaran' => 'required',
+        ];
+    }
 
-    // public function customValidationMessages()
-    // {
-    //     return [
-    //         'nama.required' => 'Nama wajib diisi',
-    //         'nisn.required' => 'NISN wajib diisi',
-    //         'tempat_lahir.required' => 'Tempat lahir wajib diisi',
-    //         'tanggal_lahir.required' => 'Tanggal lahir wajib diisi',
-    //         'agama.required' => 'Agama wajib diisi',
-    //         'jk.required' => 'Jenis kelamin wajib diisi',
-    //         'nama_orang_tua.required' => 'Nama Orang tua wajib diisi',
-    //         'id_sekolah.in' => 'id sekolah tidak ditemukan, wajib isi id sekolah dan id berdasarkan sheet id seklah',
-    //         'tahun_lulus.required' => 'Tahun lulus wajib diisi',
-    //         'tahun_ajaran.required' => 'Tahun ajaran wajib diisi',
+    public function customValidationMessages()
+    {
+        return [
+            'nama.required' => 'Nama wajib diisi',
+            'nisn.required' => 'NISN wajib diisi',
+            'tempat_lahir.required' => 'Tempat lahir wajib diisi',
+            'tanggal_lahir.required' => 'Tanggal lahir wajib diisi',
+            'agama.required' => 'Agama wajib diisi',
+            'jk.required' => 'Jenis kelamin wajib diisi',
+            'nama_orang_tua.required' => 'Nama Orang tua wajib diisi',
+            'id_sekolah.in' => 'id sekolah tidak ditemukan, wajib isi id sekolah dan id berdasarkan sheet id seklah',
+            'tahun_lulus.required' => 'Tahun lulus wajib diisi',
+            'tahun_ajaran.required' => 'Tahun ajaran wajib diisi',
 
-    //         'nisn.unique' => 'NISN sudah terdaftar, silahkan gunakan NISN lain',
-    //         'tanggal_lahir.date_format' => 'Format tanggal lahir salah',
-    //         'tahun_lulus.date_format' => 'Format tahun lulus salah',
+            'nisn.unique' => 'NISN sudah terdaftar, silahkan gunakan NISN lain',
+            'tanggal_lahir.date_format' => 'Format tanggal lahir salah',
+            'tahun_lulus.date_format' => 'Format tahun lulus salah',
 
-    //         // 'date_format' => ':attribute tidak boleh menggunakan angka',
-    //     ];
-    // }
+            // 'date_format' => ':attribute tidak boleh menggunakan angka',
+        ];
+    }
 }
