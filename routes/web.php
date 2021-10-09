@@ -58,6 +58,7 @@ Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::get('/siswa-smp', [StudentController::class,'indexSmp'])->name('student.smp');
     Route::get('/admin/download-file/{type}/name/{name}', [HomeController::class,'downloadFile'])->name('admin.download');
     Route::get('surat-keterangan/{id}', [StudentController::class,'statementLetter'])->name('statement_letter');
+    Route::get('format-surat-keterangan/{id}', [HomeController::class,'downloadLetter'])->name('statement_letter2');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

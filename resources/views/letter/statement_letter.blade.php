@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Surat Keterangan</title>
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('assets/dist/css/adminlte.min.css')}}">
     <style>
         body{
             font-size: 10px;

@@ -18,12 +18,12 @@ class HomeController extends Controller
             $schools = School::withCount(['students','students as without_ijazah'=>function($q){$q->whereNull('ijazah');}])->paginate(5);
             $sdCount = Student::whereHas('school',function($q){$q->where("level","sd");})->count();
             $smpCount = Student::whereHas('school',function($q){$q->where("level","smp");})->count();
-
-            return view('dashboard',compact('page','schools','sdCount','smpCount'));
+            $schoolsName = School::all();
+            return view('dashboard',compact('page','schools','sdCount','smpCount','schoolsName'));
         }else{
-            $schools = School::find(auth()->guard("web")->user()->school_id);
+            $schoolsName = School::find(auth()->guard("web")->user()->school_id);
             $studentCount = Student::whereHas('school',function($q){$q->where("id",auth()->guard('web')->user()->school_id);})->count();
-            return view('dashboard',compact('page','schools','studentCount'));
+            return view('dashboard',compact('page','studentCount','schoolsName'));
         }
 
     }
@@ -32,17 +32,42 @@ class HomeController extends Controller
     {
         $page = 'Dashboard';
         if (auth()->guard("admin")->check()) {
-            $schools = School::all();
+            $schools = School::withCount(['students','students as without_ijazah'=>function($q){$q->whereNull('ijazah');}])->paginate(5);
+            $sdCount = Student::whereHas('school',function($q){$q->where("level","sd");})->count();
+            $smpCount = Student::whereHas('school',function($q){$q->where("level","smp");})->count();
+            $schoolsName = School::all();
+            $student = Student::with('school')->dashboardSearch($request->all())->first();
+            return view('dashboard',compact('page','schools','sdCount','smpCount','schoolsName','student'));
         }else{
-            $schools = School::find(auth()->guard("web")->user()->school_id);
+            $studentCount = Student::whereHas('school',function($q){$q->where("id",auth()->guard('web')->user()->school_id);})->count();
+            $schoolsName = School::find(auth()->guard("web")->user()->school_id);
+            $student = Student::with('school')->dashboardSearch($request->all())->first();
+            return view('dashboard',compact('page','studentCount','schoolsName','student'));
         }
-        $student = Student::with('school')->dashboardSearch($request->all())->first();
-        return view('dashboard',compact('page','schools','student','request'));
     }
 
     public function downloadFile($type,$name)
     {
         return Storage::download("ijazah/".$name);
         // return response()->download(public_path()."/storage/".$type."/".$name);
+    }
+
+    public function downloadLetter($id)
+    {
+        switch ($id) {
+            case 1:
+                return Storage::download("letters/Format_1A.docx","Format 1A Surat Keterangan Pengganti Ijazah atau STTB (sekolah masih operasional).docx");
+                break;
+            case 2:
+                return Storage::download("letters/Format_1C.docx","Format 1C Surat Keterangan Kesalahan Penulisan Ijazah atau STTB (sekolah masih operasional).docx");
+                break;
+            case 3:
+                return Storage::download("letters/Format_5.docx","Format 5: Surat Pernyataan Tanggungjawab Mutlak.docx");
+                break;
+
+            default:
+                return abort(404);
+                break;
+        }
     }
 }

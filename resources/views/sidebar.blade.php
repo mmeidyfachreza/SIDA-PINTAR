@@ -30,20 +30,42 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('student.sd')}}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                <a href="{{route('siswa.index')}}" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
                     <p>
-                        Siswa SD
+                        Siswa
                     </p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('student.smp')}}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-copy"></i>
                     <p>
-                        Siswa SMP
+                        Surat Keterangan
+                        <i class="fas fa-angle-left right"></i>
+                        <span class="badge badge-info right">3</span>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route("statement_letter2",1)}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ijazah/STTB Hilang</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route("statement_letter2",2)}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Kesalahan Penulisan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route("statement_letter2",3)}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Pernyataan Tanggungjawab</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </nav>

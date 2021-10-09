@@ -13,6 +13,7 @@ class Student extends Model
     protected $casts = [
         'birth_date' => 'date:Y-m-d'
     ];
+
     protected $fillable = [
         'nisn',
         'name',

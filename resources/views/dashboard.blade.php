@@ -131,7 +131,7 @@
                         <div class="form-group">
                             <label>Nama Sekolah</label>
                             <select class="form-control select2" style="width: 100%;" name="school_id">
-                                @foreach ($schools as $data)
+                                @foreach ($schoolsName as $data)
                                 <option value="{{$data->id}}">{{$data->name}}</option>
                                 @endforeach
                             </select>
@@ -139,8 +139,8 @@
                         @else
                         <div class="form-group">
                             <label>Nama Sekolah</label>
-                            <input type="text" value="{{$schools->name}}" class="form-control" disabled>
-                            <input type="hidden" name="school_id" value="{{$schools->id}}">
+                            <input type="text" value="{{$schoolsName->name}}" class="form-control" disabled>
+                            <input type="hidden" name="school_id" value="{{$schoolsName->id}}">
                         </div>
                         @endif
                         <div class="form-group">
