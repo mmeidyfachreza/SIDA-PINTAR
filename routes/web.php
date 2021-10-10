@@ -38,7 +38,8 @@ Route::get('/tes', function () {
 });
 
 Route::get('test', function() {
-    Storage::disk('google')->put('test.txt', 'Hello World');
+    //Storage::disk('google')->put('test.txt', 'Hello World');
+    Storage::disk('google')->download('text.txt');
 });
 
 Auth::routes();
