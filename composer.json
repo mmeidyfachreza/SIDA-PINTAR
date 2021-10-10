@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "maatwebsite/excel": "^3.1",
-        "mews/captcha": "^3.2"
+        "mews/captcha": "^3.2",
+        "nao-pon/flysystem-google-drive": "~1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

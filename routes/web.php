@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,10 @@ Route::post('guest/siswa/pencarian', [GuestController::class,'search'])->name('s
 Route::get('/tes', function () {
     //Artisan::call('migrate:fresh --seed');
     return view("letter.letter_format");
+});
+
+Route::get('test', function() {
+    Storage::disk('google')->put('test.txt', 'Hello World');
 });
 
 Auth::routes();

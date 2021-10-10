@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Mews\Captcha\CaptchaServiceProvider::class,
+        App\Providers\GoogleDriveServiceProvider::class,
 
         /*
          * Application Service Providers...
