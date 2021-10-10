@@ -33,7 +33,7 @@ Route::post('guest/siswa/pencarian', [GuestController::class,'search'])->name('s
 
 Route::get('/tes', function () {
     //Artisan::call('migrate:fresh --seed');
-    return view("letter.statement_letter2");
+    return view("letter.letter_format");
 });
 
 Auth::routes();
