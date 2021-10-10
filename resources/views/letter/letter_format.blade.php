@@ -44,7 +44,6 @@
             height: 100px;
             margin: 0 auto;
         }
-
         #logo-kanan{
             width: 100px;
             height: 100px;
