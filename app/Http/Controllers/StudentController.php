@@ -91,13 +91,21 @@ class StudentController extends Controller
             if ($ijazah = $request->file('ijazah')) {
                 $name = $request->name.'-'.time().'.'.$ijazah->getClientOriginalExtension();
                 $student->ijazah = $name;
-                $ijazah = $request->ijazah->storeAs('ijazah',$name);
+                if (app()->environment('production')) {
+                    Storage::cloud()->put($name, $request->file('ijazah'));
+                }else {
+                    $ijazah = $request->ijazah->storeAs('ijazah',$name);
+                }
                 $student->save();
             }
             if ($photo = $request->file('photo')) {
                 $name = $request->name.'-'.time().'.'.$photo->getClientOriginalExtension();
                 $student->photo = $name;
-                $photo = $request->photo->storeAs('public/photos',$name);
+                if (app()->environment('production')) {
+                    Storage::cloud()->put($name, $request->file('photo'));
+                }else {
+                    $photo = $request->photo->storeAs('public/photos',$name);
+                }
                 $student->save();
             }
             DB::commit();

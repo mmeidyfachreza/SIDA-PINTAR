@@ -156,7 +156,7 @@
                                 <label for="ijazah">Ijazah</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="ijazah" name="ijazah" required>
+                                        <input type="file" class="custom-file-input" id="ijazah" name="ijazah">
                                         <label class="custom-file-label" for="ijazah">Pilih file</label>
                                     </div>
                                 </div>
@@ -164,13 +164,13 @@
                             <div class="form-group">
                                 <label for="ijazah_number">Nomor Ijazah</label>
                                 <input type="text" class="form-control" id="ijazah_number" name="ijazah_number"
-                                    placeholder="Masukan Nomor Ijazah" value="{{old('ijazah_number')}}" required>
+                                    placeholder="Masukan Nomor Ijazah" value="{{old('ijazah_number')}}">
                             </div>
                             <div class="form-group">
                                 <label for="ijazah">Foto Siswa</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input class="custom-file-input" type="file" accept="image/*" name="photo" onchange="preview_image(event)" required>
+                                        <input class="custom-file-input" type="file" accept="image/*" name="photo" onchange="preview_image(event)">
                                         <label class="custom-file-label" for="photo">Pilih file</label>
                                     </div>
                                 </div>
