@@ -34,15 +34,14 @@ Route::post('guest/siswa/pencarian', [GuestController::class,'search'])->name('s
 
 Route::get('/tes', function () {
     //Artisan::call('migrate:fresh --seed');
-    return view("letter.letter_format");
-});
+    //return view("letter.letter_format");
 
-Route::get('test', function() {
-    $filename = 'test.txt';
+    $filename = 'momod-1633946448.pdf';
 
-    $dir = '/';
+    // Now find that file and use its ID (path) to delete it
+    $dir = '/1RG5UcF7L80kfZ0Re13Sl9iDue9z1CClb';
     $recursive = false; // Get subdirectories also?
-    $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+    $contents = collect(Storage::listContents($dir, $recursive));
 
     $file = $contents
         ->where('type', '=', 'file')
@@ -50,13 +49,15 @@ Route::get('test', function() {
         ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
         ->first(); // there can be duplicate file names!
 
-    //return $file; // array with file info
+    Storage::delete($file['path']);
 
-    $rawData = Storage::cloud()->get($file['path']);
+    return 'File was deleted from Google Drive';
 
-    return response($rawData, 200)
-        ->header('ContentType', $file['mimetype'])
-        ->header('Content-Disposition', "attachment; filename=$filename");
+});
+
+Route::get('test', function() {
+    $storage = Storage::cloud();
+    $storage->put('test.txt', 'Hello World');
 });
 
 Auth::routes();
@@ -79,7 +80,7 @@ Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::get('format-export-siswa', [StudentController::class,'studentExportFormat'])->name('student.format.export');
     Route::get('/siswa-sd', [StudentController::class,'indexSd'])->name('student.sd');
     Route::get('/siswa-smp', [StudentController::class,'indexSmp'])->name('student.smp');
-    Route::get('/admin/download-file/{type}/name/{name}', [HomeController::class,'downloadFile'])->name('admin.download');
+    Route::get('/admin/unduh-ijazah/{id}', [StudentController::class,'ijazahDownload'])->name('ijazah.download');
     Route::get('surat-keterangan/{id}', [StudentController::class,'statementLetter'])->name('statement_letter');
     Route::get('format-surat-keterangan/{id}', [HomeController::class,'downloadLetter'])->name('statement_letter2');
 });

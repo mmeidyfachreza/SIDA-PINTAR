@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SIDA PINTAR | Bontang</title>
+  <title>{{ config('app.name', 'SIARJU') }}</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -85,7 +85,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="{{asset('assets/dist/img/bontang.png')}}" alt="AdminLTE Logo" class="brand-image" style="max-height:44px">
-      <span class="brand-text font-weight-light">SIDA PINTAR</span>
+      <span class="brand-text font-weight-light">SIARJU</span>
     </a>
 
     @if (auth()->guard("admin")->check())

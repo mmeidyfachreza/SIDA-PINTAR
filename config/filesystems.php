@@ -15,7 +15,6 @@ return [
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
-    'cloud' => 'google',
     /*
     |--------------------------------------------------------------------------
     | Filesystem Disks

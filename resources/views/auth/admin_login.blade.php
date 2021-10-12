@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SIDA PINTAR | Log in</title>
+  <title>{{ config('app.name', 'SIARJU') }}</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -17,7 +17,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>SIDA</b> PINTAR</a>
+    <a href="#"><b>SIARJU</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -45,7 +45,7 @@
         @enderror
         </div>
         <div class="input-group mb-3">
-          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukan Password" name="password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

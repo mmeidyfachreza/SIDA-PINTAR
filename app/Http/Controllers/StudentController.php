@@ -14,9 +14,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\File;
 
 class StudentController extends Controller
 {
+
+    //im using google drive storage path
+    protected $ijazah_path = "/1RG5UcF7L80kfZ0Re13Sl9iDue9z1CClb";
+    protected $photo_path = "/1Tgc1MrjUAh5rqGoqGSdhACfWhkJWno7l";
+
     /**
      * Display a listing of the resource.
      *
@@ -91,25 +97,16 @@ class StudentController extends Controller
             if ($ijazah = $request->file('ijazah')) {
                 $name = $request->name.'-'.time().'.'.$ijazah->getClientOriginalExtension();
                 $student->ijazah = $name;
-                if (app()->environment('production')) {
-                    Storage::cloud()->put($name, $request->file('ijazah'));
-                }else {
-                    $ijazah = $request->ijazah->storeAs('ijazah',$name);
-                }
+                Storage::put($this->ijazah_path."/".$name,FILE::get($request->file('ijazah')));
                 $student->save();
             }
             if ($photo = $request->file('photo')) {
                 $name = $request->name.'-'.time().'.'.$photo->getClientOriginalExtension();
                 $student->photo = $name;
-                if (app()->environment('production')) {
-                    Storage::cloud()->put($name, $request->file('photo'));
-                }else {
-                    $photo = $request->photo->storeAs('public/photos',$name);
-                }
+                Storage::put($this->photo_path."/".$name,FILE::get($request->file('photo')));
                 $student->save();
             }
             DB::commit();
-            // all good
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('siswa.create')->withErrors(['message'=>$e->getMessage()]);
@@ -174,16 +171,18 @@ class StudentController extends Controller
         try {
             $student = Student::findOrFail($id);
             if ($ijazah = $request->file('ijazah')) {
-                Storage::delete('ijazah/'.$student->ijazah);
+                $oldIjazah = $this->getFilePath($student->ijazah,$this->ijazah_path);
+                Storage::delete($oldIjazah['path']);
                 $name = $request->name.'-'.time().'.'.$ijazah->getClientOriginalExtension();
                 $student->ijazah = $name;
-                $request->ijazah->storeAs('ijazah',$name);
+                Storage::put($this->ijazah_path."/".$name,FILE::get($request->file('ijazah')));
             }
             if ($photo = $request->file('photo')) {
-                Storage::delete('photo/'.$student->photo);
+                $oldPhoto = $this->getFilePath($student->photo,$this->photo_path);
+                Storage::delete($oldPhoto['path']);
                 $name = $request->name.'-'.time().'.'.$photo->getClientOriginalExtension();
                 $student->photo = $name;
-                $request->photo->storeAs('public/photos',$name);
+                Storage::put($this->photo_path."/".$name,FILE::get($request->file('photo')));
             }
             $student->nisn = $request->nisn;
             $student->name = $request->name;
@@ -229,10 +228,14 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = Student::find($id);
+        $student = Student::findOrFail($id);
         $schoolId = $student->school_id;
-        Storage::delete('ijazah/'.$student->ijazah);
-        Storage::delete('photos/'.$student->photo);
+
+        $ijazah = $this->getFilePath($student->ijazah,$this->ijazah_path);
+        $photo = $this->getFilePath($student->photo,$this->photo_path);
+
+        Storage::delete($ijazah['path']);
+        Storage::delete($photo['path']);
         $student->delete();
         if (auth()->guard('admin')->check()) {
             if (School::where("id",$schoolId)->where("level","sd")) {
@@ -308,5 +311,32 @@ class StudentController extends Controller
             $students = Student::with('school')->search($request->value,$school->id)->paginate();
         }
         return view('admin.student.index',compact('page','students','request'));
+    }
+
+    public function ijazahDownload($id)
+    {
+        $filename = Student::findOrFail($id)->ijazah;
+
+        $file = $this->getFilePath($filename,$this->ijazah_path);
+
+        $rawData = Storage::get($file['path']);
+
+        return response($rawData, 200)
+            ->header('ContentType', $file['mimetype'])
+            ->header('Content-Disposition', "attachment; filename=$filename");
+    }
+
+    public function getFilePath($filename,$dir)
+    {
+        $recursive = false; // Get subdirectories also?
+        $contents = collect(Storage::listContents($dir, $recursive));
+
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->first(); // there can be duplicate file names!
+
+        return $file;
     }
 }

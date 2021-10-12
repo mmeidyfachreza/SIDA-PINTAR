@@ -48,8 +48,27 @@ class HomeController extends Controller
 
     public function downloadFile($type,$name)
     {
-        return Storage::download("ijazah/".$name);
+        //return Storage::download("ijazah/".$name);
         // return response()->download(public_path()."/storage/".$type."/".$name);
+        $filename = $name;
+
+        $dir = '/1RG5UcF7L80kfZ0Re13Sl9iDue9z1CClb/';
+        $recursive = false; // Get subdirectories also?
+        $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->first(); // there can be duplicate file names!
+
+        //return $file; // array with file info
+
+        $rawData = Storage::cloud()->get($file['path']);
+
+        return response($rawData, 200)
+            ->header('ContentType', $file['mimetype'])
+            ->header('Content-Disposition', "attachment; filename=$filename");
     }
 
     public function downloadLetter($id)
