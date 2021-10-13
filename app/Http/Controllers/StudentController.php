@@ -234,8 +234,12 @@ class StudentController extends Controller
         $ijazah = $this->getFilePath($student->ijazah,$this->ijazah_path);
         $photo = $this->getFilePath($student->photo,$this->photo_path);
 
-        Storage::delete($ijazah['path']);
-        Storage::delete($photo['path']);
+        if ($ijazah) {
+            Storage::delete($ijazah['path']);
+        }
+        if ($photo) {
+            Storage::delete($photo['path']);
+        }
         $student->delete();
         if (auth()->guard('admin')->check()) {
             if (School::where("id",$schoolId)->where("level","sd")) {
