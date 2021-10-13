@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\IncomingLetterController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
@@ -56,8 +57,7 @@ Route::get('/tes', function () {
 });
 
 Route::get('test', function() {
-    $storage = Storage::cloud();
-    $storage->put('test.txt', 'Hello World');
+
 });
 
 Auth::routes();
@@ -75,14 +75,14 @@ Route::group(['middleware'=>'auth:web,admin'], function() {
     Route::post('/siswa/cari', [StudentController::class,'searchStudent'])->name('search.student');
     Route::resource('akun-sekolah', UserController::class);
     Route::resource('sekolah', SchoolController::class);
+    Route::resource('surat-masuk', IncomingLetterController::class);
     Route::post('siswa-import', [StudentController::class,'studentImport'])->name('student.import');
     Route::post('siswa-update-import', [StudentController::class,'studentUpdateImport'])->name('student.import.update');
     Route::get('format-export-siswa', [StudentController::class,'studentExportFormat'])->name('student.format.export');
     Route::get('/siswa-sd', [StudentController::class,'indexSd'])->name('student.sd');
     Route::get('/siswa-smp', [StudentController::class,'indexSmp'])->name('student.smp');
     Route::get('/admin/unduh-ijazah/{id}', [StudentController::class,'ijazahDownload'])->name('ijazah.download');
-    Route::get('surat-keterangan/{id}', [StudentController::class,'statementLetter'])->name('statement_letter');
-    Route::get('format-surat-keterangan/{id}', [HomeController::class,'downloadLetter'])->name('statement_letter2');
+    Route::get('/admin/unduh-surat/{id}', [IncomingLetterController::class,'letterDownload'])->name('letter.download');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

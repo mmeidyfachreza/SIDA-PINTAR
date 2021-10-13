@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLettersTable extends Migration
+class CreateIncomingLettersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateLettersTable extends Migration
      */
     public function up()
     {
-        Schema::create('letters', function (Blueprint $table) {
+        Schema::create('incoming_letters', function (Blueprint $table) {
             $table->id();
             $table->string("ref_number");
             $table->date("date");
             $table->string("purpose");
             $table->string("content");
-            $table->string("description");
+            $table->text("description");
+            $table->string("file");
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateLettersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('letters');
+        Schema::dropIfExists('incoming_letters');
     }
 }
