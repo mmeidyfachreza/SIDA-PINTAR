@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Support\Carbon;
+use Illuminate\Support\Carbon;
 
 class IncomingLetter extends Model
 {
@@ -14,11 +14,11 @@ class IncomingLetter extends Model
 
     public function setDateAttribute($value)
     {
-        $this->attributes['date'] = date('Y-m-d', strtotime($value));
+        $this->attributes['date'] = Carbon::createFromFormat('d/m/Y', $value)->toDateString();
     }
 
     public function getDateAttribute($value)
     {
-        return $this->attributes['date'] = date('Y-m-d', strtotime($value));
+        return Carbon::parse($value)->format('d/m/Y');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Utilities\FilterBuilder;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,7 +40,7 @@ class Student extends Model
 
     public function setBirthDateAttribute($value)
     {
-        $this->attributes['birth_date'] = date('Y-m-d', strtotime($value));
+        $this->attributes['birth_date'] = Carbon::createFromFormat('d/m/Y', $value)->toDateString();
     }
 
     public function scopeDashboardSearch($querry,$request)
