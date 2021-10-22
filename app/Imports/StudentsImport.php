@@ -36,7 +36,7 @@ class StudentsImport implements ToModel, WithHeadingRow, WithValidation, SkipsEm
                 'nisn' => $row["nisn"],
                 'name' => $row["nama"],
                 'birth_place' => $row["tempat_lahir"],
-                'birth_date' => Date::excelToDateTimeObject($row["tanggal_lahir"])->format("Y-m-d") ,
+                'birth_date' => Date::excelToDateTimeObject($row["tanggal_lahir"])->format("Y-m-d"),
                 'religion' => $row["agama"],
                 'gender' => $row["jk"],
                 'father_name' => $row["nama_orang_tua"],

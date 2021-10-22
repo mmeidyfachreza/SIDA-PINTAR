@@ -24,11 +24,11 @@ class StudentSheetFormat implements WithTitle, WithHeadings, FromArray
     {
         if ($this->schoolId==0) {
             return [
-                ["0044959620", "ABIDAH IZDIHAR DZAKIYYAH", "BONTANG", "YYYY/MM/DD", "Islam", "P", "Wasikin", "", "8 (silahkan lihat dari sheet Id Sekolah)", 2012, "2010/2011", "DN-16/D-SMP/13/2106457"],
+                ["0044959620", "ABIDAH IZDIHAR DZAKIYYAH", "BONTANG", "YYYY-MM-DD", "Islam", "P", "Wasikin", "", "8 (silahkan lihat dari sheet Id Sekolah)", 2012, "2010/2011", "DN-16/D-SMP/13/2106457"],
             ];
         }else {
             return [
-                ["0044959620", "ABIDAH IZDIHAR DZAKIYYAH", "BONTANG", "YYYY/MM/DD", "Islam", "P", "Wasikin", "", 2012, "2010/2011", "DN-16/D-SMP/13/2106457"],
+                ["0044959620", "ABIDAH IZDIHAR DZAKIYYAH", "BONTANG", "YYYY-MM-DD", "Islam", "P", "Wasikin", "", 2012, "2010/2011", "DN-16/D-SMP/13/2106457"],
             ];
         }
     }

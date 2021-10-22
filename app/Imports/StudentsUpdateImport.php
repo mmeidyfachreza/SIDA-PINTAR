@@ -6,12 +6,14 @@ use App\Models\School;
 use App\Models\Student;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
-class StudentsUpdateImport implements ToCollection, WithHeadingRow, WithValidation
+class StudentsUpdateImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
 {
 
     protected $schoolId;
@@ -25,12 +27,15 @@ class StudentsUpdateImport implements ToCollection, WithHeadingRow, WithValidati
     {
         foreach ($rows as $row)
         {
-            // dd($row);
+            $validator = Validator::make($row->toArray(), [
+                'title' => 'required|unique:posts|max:255',
+                'body' => 'required',
+            ])->validate();
             if ($student = Student::where("nisn",$row["nisn"])->first()) {
                 $student->update([
                     'name' => $row["nama"],
                     'birth_place' => $row["tempat_lahir"],
-                    'birth_date' => Date::excelToDateTimeObject($row["tanggal_lahir"]),
+                    'birth_date' => Date::excelToDateTimeObject($row["tanggal_lahir"])->format("Y-m-d"),
                     'religion' => $row["agama"],
                     'gender' => $row["jk"],
                     'father_name' => $row["nama_orang_tua"],
