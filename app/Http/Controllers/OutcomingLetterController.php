@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OutcomingLetter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use PDF;
@@ -114,7 +115,9 @@ class OutcomingLetterController extends Controller
     public function print(Request $request)
     {
         $outcomingLetter = OutcomingLetter::findOrFail($request->id);
-        return view('letter.letter_format_dev',compact('outcomingLetter'));
+        $date = Carbon::createFromFormat('d/m/Y', $outcomingLetter->date)->translatedFormat('d F Y');
+
+        return view('letter.letter_format_dev',compact('outcomingLetter','date'));
     }
 
 }

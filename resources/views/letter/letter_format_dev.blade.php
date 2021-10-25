@@ -76,7 +76,7 @@
         </div>
         <hr>
         <div class="body">
-            <p style="text-align: right">Bontang, 28 September 2021</p>
+            <p style="text-align: right">Bontang, {{$date}}</p>
             <br>
             <table>
                 <tr>
