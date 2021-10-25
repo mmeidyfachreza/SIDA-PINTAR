@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Admin::create([
-            'username' => "disdik",
+            'username' => "siarju",
             'name' => "Super Admin",
             'password' => Hash::make("123123"),
             'remember_token' => Str::random(10),
