@@ -66,9 +66,27 @@
         <hr>
         <div class="body">
             <p style="text-align: right">Bontang, 28 September 2021</p>
-            <p>No       : 421.2/  /SDN 001.BU</p>
-            <p>Lampiran : - </p>
-            <p></p>
+            <br>
+            <table>
+                <tr>
+                    <td><p>No</p></td>
+                    <td><p>: {{$outcomingLetter->ref_number}}</p></td>
+                </tr>
+                <tr>
+                    <td><p>Lampiran</p></td>
+                    <td>: -</td>
+                </tr>
+                <tr>
+                    <td><p>Hal</p></td>
+                    <td><p>: <b>{{$outcomingLetter->purpose}}</b></p></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <img src="{{asset("assets/dist/img/bontang.png")}}" id="logo-kiri" alt="">
+            {!!$outcomingLetter->content!!}
         </div>
     </div>
 </body>

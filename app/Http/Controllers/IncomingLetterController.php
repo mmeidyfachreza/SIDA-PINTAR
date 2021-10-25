@@ -76,9 +76,10 @@ class IncomingLetterController extends Controller
      * @param  \App\Models\IncomingLetter  $incomingLetter
      * @return \Illuminate\Http\Response
      */
-    public function edit(IncomingLetter $incomingLetter)
+    public function edit($id)
     {
-        //
+        $inLetter = IncomingLetter::findOrFail($id);
+        return view('admin.incoming_letter.edit',compact('inLetter'));
     }
 
     /**
@@ -88,9 +89,31 @@ class IncomingLetterController extends Controller
      * @param  \App\Models\IncomingLetter  $incomingLetter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, IncomingLetter $incomingLetter)
+    public function update(Request $request, $id)
     {
-        //
+        $inLetter = IncomingLetter::findOrFail($id);
+        DB::beginTransaction();
+        try {
+            if ($letter = $request->file('file')) {
+                $oldInLetter = $this->getFilePath($inLetter->file,$this->inLetterPath);
+                Storage::delete($oldInLetter['path']);
+                $name = rand().'-'.time().'.'.$letter->getClientOriginalExtension();
+                $inLetter->file = $name;
+                Storage::put($this->inLetterPath."/".$name,FILE::get($request->file('file')));
+            }
+            $inLetter->ref_number = $request->ref_number;
+            $inLetter->date = $request->date;
+            $inLetter->purpose = $request->purpose;
+            $inLetter->content = $request->content;
+            $inLetter->description = $request->description;
+            $inLetter->update();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('surat-masuk.edit',$inLetter->id)->withErrors(['message'=>$e->getMessage()]);
+        }
+
+        return redirect()->route('surat-masuk.index')->with('success','Berhasil menambah data');
     }
 
     /**
