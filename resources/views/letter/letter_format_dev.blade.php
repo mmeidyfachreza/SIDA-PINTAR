@@ -61,7 +61,7 @@
         <div class="header">
             <table>
                 <tr>
-                    <td id="logo-kiri"><img src="{{asset("assets/dist/img/bontang.png")}}" alt=""></td>
+                    <td id="logo-kiri"><img src="{{asset("assets/dist/img/sd-001-bontang-utara.jpeg")}}" alt=""></td>
                     <td>
                         <div class="content">
                             <p>PEMERINTAH KOTA BONTANG</p>
@@ -70,7 +70,7 @@
                             <P>FAX ( 0548 ) 29165, EMAIL sdn004@gmail.com BONTANG</P>
                         </div>
                     </td>
-                    <td id="logo-kanan"><img src="{{asset("assets/dist/img/sd-001-bontang-utara.jpeg")}}" alt=""></td>
+                    <td id="logo-kanan"><img src="{{asset("assets/dist/img/bontang.png")}}" alt=""></td>
                 </tr>
             </table>
         </div>

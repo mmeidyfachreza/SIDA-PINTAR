@@ -33,7 +33,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{asset('assets/dist/img/bontang.png')}}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="{{asset('assets/dist/img/sd-001-bontang-utara.jpeg')}}" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -85,7 +85,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="{{asset('assets/dist/img/bontang.png')}}" alt="AdminLTE Logo" class="brand-image" style="max-height:44px">
+      <img src="{{asset('assets/dist/img/sd-001-bontang-utara.jpeg')}}" alt="AdminLTE Logo" class="brand-image" style="max-height:44px">
       <span class="brand-text font-weight-light">SIARJU</span>
     </a>
 
