@@ -36,7 +36,6 @@ class StoreStudentRequest extends FormRequest
             'school_year' => 'required',
             'ijazah' => 'required|mimes:pdf|max:2048',
             'ijazah_number'=> 'required',
-            'photo' => 'mimes:png,jpeg,jpg|max:2048',
         ];
     }
 

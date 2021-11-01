@@ -9,10 +9,13 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
-use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 
-class StudentsSheetImport implements ToModel, WithHeadingRow
+class StudentsSheetImport implements ToModel, WithHeadingRow, WithValidation, SkipsEmptyRows
 {
+
+    use Importable;
 
     protected $schoolId;
 
@@ -27,20 +30,24 @@ class StudentsSheetImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        return new Student([
-            'nisn' => $row["nisn"],
-            'name' => $row["nama"],
-            'birth_place' => $row["tempat_lahir"],
-            'birth_date' => Date::excelToDateTimeObject($row["tanggal_lahir"])->format("Y-m-d") ?? Null,
-            'religion' => $row["agama"],
-            'gender' => $row["jk"],
-            'father_name' => $row["nama_orang_tua"],
-            'guardian_name' => $row["nama_wali"],
-            'school_id' => $row["id_sekolah"] ?? $this->schoolId,
-            'graduated_year' => $row["tahun_lulus"],
-            'school_year' => $row["tahun_ajaran"],
-        ]);
+        //dd($row["nomor_ijazah"]);
+
+            return new Student([
+                'nisn' => $row["nisn"],
+                'name' => $row["nama"],
+                'birth_place' => $row["tempat_lahir"],
+                'birth_date' => Date::excelToDateTimeObject($row["tanggal_lahir"])->format("d/m/Y") ,
+                'religion' => $row["agama"],
+                'gender' => $row["jk"],
+                'father_name' => $row["nama_orang_tua"],
+                'guardian_name' => $row["nama_wali"],
+                'school_id' => ($this->schoolId) ? $this->schoolId : $row["id_sekolah"],
+                'graduated_year' => $row["tahun_lulus"],
+                'school_year' => $row["tahun_ajaran"],
+                'ijazah_number' => $row["nomor_ijazah"],
+            ]);
     }
+
 
     public function rules(): array
     {
@@ -50,13 +57,14 @@ class StudentsSheetImport implements ToModel, WithHeadingRow
             'nisn'=> 'required|unique:students,nisn',
             'nama' => 'required|string',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
+            'tanggal_lahir' => 'required|integer',
             'agama' => 'required',
             'jk' => Rule::in($gender),
             'nama_orang_tua'=> 'required',
             'id_sekolah'=> Rule::in($schoolId),
             'tahun_lulus' => 'required|date_format:Y',
             'tahun_ajaran' => 'required',
+            'nomor_ijazah' => 'required',
         ];
     }
 
@@ -73,9 +81,10 @@ class StudentsSheetImport implements ToModel, WithHeadingRow
             'id_sekolah.in' => 'id sekolah tidak ditemukan, wajib isi id sekolah dan id berdasarkan sheet id seklah',
             'tahun_lulus.required' => 'Tahun lulus wajib diisi',
             'tahun_ajaran.required' => 'Tahun ajaran wajib diisi',
+            'nomor_ijazah.required' => 'Nomor ijazah wajib diisi',
 
             'nisn.unique' => 'NISN sudah terdaftar, silahkan gunakan NISN lain',
-            'tanggal_lahir.date_format' => 'Format tanggal lahir salah',
+            'tanggal_lahir.integer' => 'Format tanggal lahir salah dan pastikan tidak ada tanda petik seperti \'02/12/2021',
             'tahun_lulus.date_format' => 'Format tahun lulus salah',
 
             // 'date_format' => ':attribute tidak boleh menggunakan angka',
