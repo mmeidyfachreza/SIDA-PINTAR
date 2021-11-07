@@ -164,22 +164,26 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStudentRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $page = "Siswa";
         DB::beginTransaction();
         try {
             $student = Student::findOrFail($id);
             if ($ijazah = $request->file('ijazah')) {
-                $oldIjazah = $this->getFilePath($student->ijazah,$this->ijazah_path);
-                Storage::delete($oldIjazah['path']);
+                if($student->ijazah){
+                    $oldIjazah = $this->getFilePath($student->ijazah,$this->ijazah_path);
+                    Storage::delete($oldIjazah['path']);
+                }
                 $name = $request->name.'-'.time().'.'.$ijazah->getClientOriginalExtension();
                 $student->ijazah = $name;
                 Storage::put($this->ijazah_path."/".$name,FILE::get($request->file('ijazah')));
             }
             if ($photo = $request->file('photo')) {
                 $oldPhoto = $this->getFilePath($student->photo,$this->photo_path);
-                Storage::delete($oldPhoto['path']);
+                if($oldPhoto){
+                    Storage::delete($oldPhoto['path']);
+                }
                 $name = $request->name.'-'.time().'.'.$photo->getClientOriginalExtension();
                 $student->photo = $name;
                 Storage::put($this->photo_path."/".$name,FILE::get($request->file('photo')));
@@ -188,7 +192,7 @@ class StudentController extends Controller
             $student->name = $request->name;
             // $student->address = $request->address;
             $student->birth_place = $request->birth_place;
-            $student->birth_date = \Carbon\Carbon::createFromFormat('d/m/Y', $request->birth_date)->format('d-m-Y');
+            $student->birth_date = $request->birth_date;
             $student->religion = $request->religion;
             $student->gender = $request->gender;
             $student->father_name = $request->father_name;
