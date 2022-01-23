@@ -181,7 +181,7 @@ class StudentController extends Controller
             $student->name = $request->name;
             // $student->address = $request->address;
             $student->birth_place = $request->birth_place;
-            $student->birth_date = \Carbon\Carbon::createFromFormat('d/m/Y', $request->birth_date)->format('d-m-Y');
+            $student->birth_date = $request->birth_date;
             $student->religion = $request->religion;
             $student->gender = $request->gender;
             $student->father_name = $request->father_name;
@@ -293,7 +293,7 @@ class StudentController extends Controller
     {
         if (auth()->guard("admin")->check()) {
             $page = 'Siswa '.strtoupper($request->level);
-            $students = Student::with('school')->filterBy($request->all())->whereHas("school",function($q) use ($request){$q->where("level",$request->level);})->paginate();
+            $students = Student::with('school')->search($request->value)->whereHas("school",function($q) use ($request){$q->where("level",$request->level);})->paginate();
         }else{
             $page = 'Siswa';
             $school = School::find(auth()->guard("web")->user()->school_id);

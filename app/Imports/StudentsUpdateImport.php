@@ -57,7 +57,7 @@ class StudentsUpdateImport implements ToCollection, WithHeadingRow, SkipsEmptyRo
             'nisn'=> 'required',
             'nama' => 'required|string',
             'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required|integer',
+            'tanggal_lahir' => 'required',
             'agama' => 'required',
             'jk' => Rule::in($gender),
             'nama_orang_tua'=> 'required',
