@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\View\Components\PageHeader;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,5 +31,8 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('id');
         date_default_timezone_set('Asia/Makassar');
         Blade::component('page-header', PageHeader::class);
+        if($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }

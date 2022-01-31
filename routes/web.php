@@ -7,6 +7,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.home');
 })->name('welcome');
 
 Route::get('guest/siswa', function () {
@@ -35,6 +36,16 @@ Route::get('/tes', function () {
     //Artisan::call('migrate:fresh --seed');
     return view("letter.letter_format");
 });
+
+// Route::get('/maintenance', function () {
+//     Artisan::call('down --secret="ag2Vk5hfUfVfJfhBvvWz"');
+//     return "maintenance on";
+// });
+
+// Route::get('/up', function () {
+//     Artisan::call('up');
+//     return "maintenance off";
+// });
 
 Auth::routes();
 
